@@ -93,4 +93,3 @@ print("red b", b[0], id(b)) # 변경됨. 기존 리스트의 주소값을 참조
 print("red c", c[0], id(c)) # 변경되지 않음 (함수 내부의 지역변수 c가 새 리스트를 가리키기 때문)
 print("red d", d, id(d))
 print("red e", e, id(e))
-
