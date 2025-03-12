@@ -38,4 +38,4 @@
 # zip, 압축
 # 쓸데없는 공백 지우기
 
-print("ASD");
+print("ASD")

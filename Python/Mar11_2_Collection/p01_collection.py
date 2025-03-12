@@ -35,6 +35,3 @@ print(student)
 print(type(student))
 print(student["반장"])
 
-
-
-

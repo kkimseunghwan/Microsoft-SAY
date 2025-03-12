@@ -63,4 +63,6 @@ print(H)
 # I는 H의 반대
 I = not H
 
+# 3항 연신자?
 SAY = "타세요" if age > 10 else "가세요"
+
