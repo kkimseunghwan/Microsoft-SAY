@@ -83,11 +83,14 @@ print("-----")
 #     value -= 1
 
 
-# 반복문 배우고 다시 돌아왔음.
-print_dict = { 3:"24시간", 2:"흡연실", 1:"주차장", 0:"와이파이" }
+
+
+
+# 반복문 배우고 문제 재 풀이.
+print_dict = { 8:"24시간", 4:"흡연실", 2:"주차장", 1:"와이파이" }
 
 for x, y in print_dict.items():
-    if value >= (1 << x):
+    if value >= x:
         print(y)
-        value -= (1 << x)
+        value -= x
 
