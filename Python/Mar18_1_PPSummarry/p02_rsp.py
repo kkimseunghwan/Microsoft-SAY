@@ -72,8 +72,6 @@ def ANS(userHand, gameAns):
         print("승")
         return 1
 
-
-
 ####################
 
 win = 0 # 최종 연승 계산
