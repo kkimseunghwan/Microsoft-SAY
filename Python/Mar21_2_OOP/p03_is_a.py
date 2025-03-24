@@ -28,7 +28,6 @@ class Human:
     def printInfo(self):
         print(self.name)
         print(self.address)
-        
 
 # 로 부터 상속받는 아이언맨   # Ironma is a Avengers
 # 아이언맨은 사람임           # Ironman is a Human
@@ -38,10 +37,17 @@ class Human:
 #   - 가능은 한데, 어지러움은 인간의 몫
 #   - 상속한 멤버의 이름이 중복될 경우 : 먼저 상속한걸로
 class IronMan(Avengers, Human):
-    pass
+    def __init__(self, name, age, addr):
+        super().__init__(name, age) # super : 먼저쓴거 Avengers
+        self.addr = addr
+    
+    def printInfo(self):
+        super().printInfo()
+        print(self.addr)
+    
 ####################
 
-i = IronMan("토니", 40)
+i = IronMan("토니", 40, "미국")
 i.attack()
 i.eat()
 i.printInfo()
