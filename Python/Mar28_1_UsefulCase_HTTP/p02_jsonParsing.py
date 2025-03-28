@@ -24,11 +24,9 @@
 
 # [ 실시간 날씨 데이터 받아와서 출력하기. ]
 # => openweathermap.org
-# 52a70a8231093779853b13151762e1de => 내 API
-# baff8f3c6cbc28a4024e336599de28c4 => 선생님 API 
 
 # API Call
-# =>> https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=52a70a8231093779853b13151762e1de&units=metric&lang=kr
+# =>> https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=52a70a823093779853b13151762e1de&units=metric&lang=kr
 
 # 1) HTTP 통신걸어서 받아와서 콘솔 출력
 
@@ -36,7 +34,7 @@ from http.client import HTTPConnection
 from json import loads
 
 hc = HTTPConnection("api.openweathermap.org")
-hc.request("GET", "/data/2.5/weather?q=seoul&appid=52a70a8231093779853b13151762e1de&units=metric&lang=kr")
+hc.request("GET", "/data/2.5/weather?q=seoul&appid=&units=metric&lang=kr")
 resbody = hc.getresponse().read()
 # print(resbody.decode())
 hc.close()

@@ -13,7 +13,7 @@ from xml.etree.ElementTree import fromstring
 # 2) 파싱
 # 3) 파일에에
 hc = HTTPConnection("openapi.seoul.go.kr:8088")
-hc.request("GET", "/575a4655496b636839386f58586542/xml/RealtimeCityAir/1/25/")
+hc.request("GET", "//xml/RealtimeCityAir/1/25/")
 resBody = hc.getresponse().read()
 hc.close()
 
