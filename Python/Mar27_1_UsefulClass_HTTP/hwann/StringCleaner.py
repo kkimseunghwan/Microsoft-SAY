@@ -8,4 +8,11 @@ class StringCleaner:
         txt = txt.replace("<b>", "")
         txt = txt.replace("</b>", "")
         return txt
+    
+    def CleanTXT(txt):
+        txt = txt.replace("&quot;", "")
+        txt = txt.replace("<b>", "")
+        txt = txt.replace("</b>", "")
+        txt = txt.replace(",", "")
+        return txt
 
