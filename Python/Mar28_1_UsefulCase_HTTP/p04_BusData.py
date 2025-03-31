@@ -1,5 +1,5 @@
 
-# http://openapi.seoul.go.kr:8088/575a4655496b636839386f58586542/json/CardBusStatisticsServiceNew/1/5/20151101/
+# http://openapi.seoul.go.kr:8088//json/CardBusStatisticsServiceNew/1/5/20151101/
 
 # 1) 파싱해서 csv로 만들기
 # 2) 노선별 평균 이용객 수 / 제일 사람이 많은 정류장 / 사계절 중 버스 정류장이 제일 복잡한 계절
@@ -13,7 +13,7 @@ from json import loads
 from hwan.StringCleaner import StringCleaner
 import time
 
-defaultURL = "/575a4655496b636839386f58586542/json/CardBusStatisticsServiceNew/"
+defaultURL = "//json/CardBusStatisticsServiceNew/"
 
 hc = HTTPConnection("openapi.seoul.go.kr:8088")
 

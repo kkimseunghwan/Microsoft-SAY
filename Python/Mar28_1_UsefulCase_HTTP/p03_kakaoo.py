@@ -8,7 +8,7 @@
 #   회사명 알아서
 #   카테고리 알아서
 #   -> 앱 키 -> REST API KEY
-#       -> 34123ebf23834864122c75d234e70515
+#       -> 
 
 
 # https://dapi.kakao.com/v2/local/search/keyword.${FORMAT}
@@ -27,7 +27,7 @@ q = quote(q)
 
 hc = HTTPConnection("dapi.kakao.com")
 
-hc.request("GET", "/v2/local/search/keyword.json?query="+q, headers="Authorization":"KakaoAK 34123ebf23834864122c75d234e70515")
+#hc.request("GET", "/v2/local/search/keyword.json?query="+q, headers="Authorization":"KakaoAK ")
 
 resbody = hc.getresponse().read()
 kakaoMapData = loads(resbody)

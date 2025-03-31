@@ -2,12 +2,12 @@
 # 2015/01/01 ~ 2024/12/31 전체 지하철 운행 정보 subway.csv로
 # -> 2015,01,01,1호선,서울역,45000,30000
 
-# http://openapi.seoul.go.kr:8088/575a4655496b636839386f58586542/xml/CardSubwayStatsNew/1/1000/20150101/
+# http://openapi.seoul.go.kr:8088//xml/CardSubwayStatsNew/1/1000/20150101/
 # http://openapi.seoul.go.kr:8088/.../xml/CardSubwayStatsNew/1/1000/20150101/
 
 
 
-defaultURL = "/575a4655496b636839386f58586542/xml/CardSubwayStatsNew/1/620/"
+defaultURL = "//xml/CardSubwayStatsNew/1/620/"
 
 import time # 코드 시간 측정.
 

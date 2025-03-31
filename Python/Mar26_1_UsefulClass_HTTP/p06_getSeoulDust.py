@@ -1,5 +1,5 @@
 
-# http://openapi.seoul.go.kr:8088/575a4655496b636839386f58586542/xml/RealtimeCityAir/1/25/
+# http://openapi.seoul.go.kr:8088//xml/RealtimeCityAir/1/25/
 
 # 서울시 실시간 미세먼지 데이터를 저장하는 프로그럄
 

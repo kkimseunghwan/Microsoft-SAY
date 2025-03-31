@@ -126,4 +126,6 @@ print(name == "홍길동") # True
 print(id(a), id(d), id(e)) # 주소값이 모두 같음
 
 
-
+# 정적 타입 힌트 -> 실행 속도 향상됨
+def PrintSum(a:int, b:int):
+    return a + b

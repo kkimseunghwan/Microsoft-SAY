@@ -26,7 +26,7 @@
 # => openweathermap.org
 
 # API Call
-# =>> https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=52a70a823093779853b13151762e1de&units=metric&lang=kr
+# =>> https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=&units=metric&lang=kr
 
 # 1) HTTP 통신걸어서 받아와서 콘솔 출력
 
