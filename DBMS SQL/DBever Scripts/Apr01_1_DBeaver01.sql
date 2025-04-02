@@ -1,3 +1,7 @@
+-- 드라이버 안바아지면
+-- 윈도우 - 환경설정 - 연결 - Use Windows Store 체크 해제 
+-- DBaever 재시작
+
 -- 위도우 - 환경설정 - User Interface
 -- - 모양 - 색상 및 글꼴 - DBeaver Fonts
 -- - Monospace font 변경
@@ -15,9 +19,6 @@
 
 INSERT INTO mar31_snack values('c', 0);
 
-ROLLBACK 
-
-DELETE FROM mar31_snack
 
 SELECT * FROM mar31_snack;
 
