@@ -97,12 +97,19 @@ INSERT INTO Menu VALUES(Menu_SEQ.nextval, '돈까스김밥', 4000, '식사', 1);
 INSERT INTO Menu VALUES(Menu_SEQ.nextval, '불고기김밥', 4500, '식사', 6);
 INSERT INTO Menu VALUES(Menu_SEQ.nextval, '소고기김밥', 5000, '식사', 5);
 INSERT INTO Menu VALUES(Menu_SEQ.nextval, '스페셜정식', 20000, '식사', 1);
+INSERT INTO Menu VALUES(Menu_SEQ.nextval, '소고기샤브', 25000, '식사', 4);
+INSERT INTO Menu VALUES(Menu_SEQ.nextval, '돼지고기샤브', 18000, '식사', 4);
+INSERT INTO Menu VALUES(Menu_SEQ.nextval, '칼국수', 8000, '식사', 4);
+INSERT INTO Menu VALUES(Menu_SEQ.nextval, '볶음밥', 5000, '식사', 4);
+INSERT INTO Menu VALUES(Menu_SEQ.nextval, '매운샤브', 21000, '식사', 4);
 SELECT * FROM Menu;
 
 ----- 운영 -----
 INSERT INTO Operate VALUES(Operate_SEQ.nextval, 1, 6);
 INSERT INTO Operate VALUES(Operate_SEQ.nextval, 2, 1);
 INSERT INTO Operate VALUES(Operate_SEQ.nextval, 5, 3);
+INSERT INTO Operate VALUES(Operate_SEQ.nextval, 1, 5);
+INSERT INTO Operate VALUES(Operate_SEQ.nextval, 1, 4);
 SELECT * FROM Operate;
 
 
@@ -243,10 +250,14 @@ ORDER BY m_name, m_price;
 
 -- 사장이름, 생일, 매장명, 지점명
 -- 사장님 나이 어린 순
-SELECT * 
+SELECT c_name, c_birth, r_name, r_locate
 FROM CEO c, Restaurant r, Operate o
 WHERE o.o_c_no = c.c_no
 AND o.o_r_no = r.r_no
+ORDER BY c_birth DESC;
+
+
+
 
 
 
