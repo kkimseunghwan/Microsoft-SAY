@@ -4,4 +4,4 @@ def sol(n):
 print(sol(1234))
 
 
-print(list(str(1234)))
+print(list(str(1234)).)
