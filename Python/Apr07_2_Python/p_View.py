@@ -17,7 +17,9 @@ class ConsoleMainMenu:
         print("4) 과자 전체 조회")
         print("5) 회사 조회")
         print("6) 과자 조회")
-        print("...")
+        print("7) 회사 검색")
+        print("8) 과자 검색")
+        print("9) 과자 정보 조회")
         print("10) 종료")
         print("----------")
 
@@ -36,6 +38,10 @@ class ConsoleMainMenu:
         return Company(name, addr, ceo, emp)
     
     @staticmethod
+    def showSearchMenu():
+        return input("검색어 : ")
+
+    @staticmethod
     def getRegSnackInfo():
         print("-----")
         name = input("과자 이름 : ")
@@ -48,9 +54,7 @@ class ConsoleMainMenu:
     @staticmethod
     def getSelectPage(allPage):
         print("-----")
-        print("전체 페이지 >> %d" % allPage)
-        page = input("확인할 페이지 : ")
-        return page
+        return input("페이지(1 ~ %d) : " % allPage)
     
         
     @staticmethod
@@ -62,6 +66,21 @@ class ConsoleMainMenu:
     def showSnacksInfo(snacks):
         for snack in snacks:
             print("%d %s  %s  %d  %d  %s" % (snack.no, snack.name, snack.exp, snack.price, snack.weight, snack.c_name))
+    
+    @staticmethod
+    def showSnacksInfo2(snackInfo):
+        for snack in snackInfo:
+            print("[%d] %s : %d원 %dg\n유통기한 : %s\n%s\n> %s\n> %s\n> %d" % (snack.no, snack.name, snack.price, snack.weight, snack.exp, snack.c_name, snack.c_addr, snack.c_ceo, snack.c_emp))
+
+    @staticmethod
+    def showSnacksInfoVer2(snacks, companyDict):
+        for snack in snacks:
+            print("[%d] %s : %d원(%dg)" % (snack.no, snack.name, snack.price, snack.weight))
+            print("유통기한 : %s" % snack.exp)
+            print("회사:%s" % snack.c_name)
+            print("> 위치: %s" % companyDict[snack.c_name].addr)
+            print("> 사장: %s" % companyDict[snack.c_name].ceo)
+            print("> 직원: %s" % companyDict[snack.c_name].emp)
 
     @staticmethod
     def showResult(result):
