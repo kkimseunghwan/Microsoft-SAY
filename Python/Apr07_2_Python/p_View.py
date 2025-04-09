@@ -72,15 +72,19 @@ class ConsoleMainMenu:
         for snack in snackInfo:
             print("[%d] %s : %d원 %dg\n유통기한 : %s\n%s\n> %s\n> %s\n> %d" % (snack.no, snack.name, snack.price, snack.weight, snack.exp, snack.c_name, snack.c_addr, snack.c_ceo, snack.c_emp))
 
+    # no, name, exp, price, weight, c_name, c_addr, c_ceo, c_emp 
     @staticmethod
-    def showSnacksInfoVer2(snacks, companyDict):
+    def showSnacksInfoVer2(snacks):
         for snack in snacks:
             print("[%d] %s : %d원(%dg)" % (snack.no, snack.name, snack.price, snack.weight))
             print("유통기한 : %s" % snack.exp)
             print("회사:%s" % snack.c_name)
-            print("> 위치: %s" % companyDict[snack.c_name].addr)
-            print("> 사장: %s" % companyDict[snack.c_name].ceo)
-            print("> 직원: %s" % companyDict[snack.c_name].emp)
+            #print("> 위치: %s" % companyDict[snack.c_name].addr)
+            #print("> 사장: %s" % companyDict[snack.c_name].ceo)
+            #print("> 직원: %s" % companyDict[snack.c_name].emp)
+            print("> 위치: %s" % snack.c_addr)
+            print("> 사장: %s" % snack.c_ceo)
+            print("> 직원: %s" % snack.c_emp)
 
     @staticmethod
     def showResult(result):

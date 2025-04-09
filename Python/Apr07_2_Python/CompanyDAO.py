@@ -159,3 +159,6 @@ class CompanyDAO:
             return None
         finally:
             DBManager.closeConCur(con, cur)
+
+
+

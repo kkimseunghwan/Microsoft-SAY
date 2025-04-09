@@ -8,12 +8,10 @@
 # => ...
 # 10종료 전 까지 반복
 
-
 from CompanyDAO import CompanyDAO
 from SnackDAO import SnackDAO
 from p_View import ConsoleMainMenu
 import time
-
 
 # 아래 코드는 반복문이 돌아가면서, 
 # 매 호출마다 DB에 연결 및 연결 해제 작업이 반복됨
@@ -102,6 +100,33 @@ def selectSnackSearch():
 
 # (비효율 ver.)
 #9 - 1 > JOIN 사용 
+# def selectFullInformation():
+#     searchTxt = ConsoleMainMenu.showSearchMenu()
+#     allPage = sDAO.getAllPageCount(searchTxt)
+#     if allPage == 0:
+#         raise LookupError("검색한 값이 없음")
+#     targetPage = ConsoleMainMenu.getSelectPage(allPage)
+#     start = time.time()
+#     snackInfo = sDAO.getSnackInformation(targetPage, searchTxt)
+#     ConsoleMainMenu.showSnacksInfo2(snackInfo)
+#     end = time.time()
+#     print("동작 시간", end - start)
+
+# 9 - 2 : 딕셔너리로 데이터 조회
+# def selectFullInformation():
+#     searchTxt = ConsoleMainMenu.showSearchMenu()
+#     allPage = sDAO.getAllPageCount(searchTxt)
+#     if allPage == 0:
+#         raise LookupError("검색한 값이 없음")
+#     targetPage = ConsoleMainMenu.getSelectPage(allPage)
+#     start = time.time()
+#     snacks = sDAO.getSnackTargetPage(targetPage, searchTxt)
+#     companyDict = cDAO.getCompanyDictData()
+#     ConsoleMainMenu.showSnacksInfoVer2(snacks, companyDict)
+#     end = time.time()
+#     print("동작 시간", end - start)
+
+# 9 - 3 JOIN문 최적화
 def selectFullInformation():
     searchTxt = ConsoleMainMenu.showSearchMenu()
     allPage = sDAO.getAllPageCount(searchTxt)
@@ -109,24 +134,12 @@ def selectFullInformation():
         raise LookupError("검색한 값이 없음")
     targetPage = ConsoleMainMenu.getSelectPage(allPage)
     start = time.time()
-    snackInfo = sDAO.getSnackInformation(targetPage, searchTxt)
-    ConsoleMainMenu.showSnacksInfo2(snackInfo)
+    snackInfo = sDAO.getSnackCommand_9(targetPage, searchTxt)
+    print(snackInfo)
+    ConsoleMainMenu.showSnacksInfoVer2(snackInfo)
     end = time.time()
     print("동작 시간", end - start)
 
-# 9 - 2 : 딕셔너리로 데이터 조회
-def selectFullInformation():
-    searchTxt = ConsoleMainMenu.showSearchMenu()
-    allPage = sDAO.getAllPageCount(searchTxt)
-    if allPage == 0:
-        raise LookupError("검색한 값이 없음")
-    targetPage = ConsoleMainMenu.getSelectPage(allPage)
-    start = time.time()
-    snacks = sDAO.getSnackTargetPage(targetPage, searchTxt)
-    companyDict = cDAO.getCompanyDictData()
-    ConsoleMainMenu.showSnacksInfoVer2(snacks, companyDict)
-    end = time.time()
-    print("동작 시간", end - start)
 # JOIN보다 시간이 오래 걸림. << 이 방법은 아닌듯 - 폐기
 #   >>> 아 DB서버에서 데이터를 불러오는 시간을 신경쓴다면 더 느리겠네.
 # Snack과 Company의 데이터를 따로따로 가지고 와서 작업 한다면,
@@ -155,11 +168,6 @@ def selectFullInformation():
 # N+1 문제?
 
 # 2) JOIN은 시키는데, 전체 말고 필요한 부분만 JOIN해서 연산을 줄이기.
-
-
-
-
-
 
 # 10
 def exit_loop():

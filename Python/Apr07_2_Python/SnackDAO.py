@@ -153,3 +153,56 @@ class SnackDAO:
             DBManager.closeConCur(con, cur)
 
     
+    
+    ## 페이지 검색 ##
+    ## 9번 전용 버전 ##
+    def getSnackCommand_9(self,targetPage, searchTxt=""):
+        try:
+            targetPage = int(targetPage)
+            startPage = (targetPage-1) * self.snackPerPage + 1
+            endPage = targetPage * self.snackPerPage
+
+            con, cur = DBManager.connectDBServer("Hwan/1234@195.168.9.116:1521/xe")
+            
+            sql = f"SELECT S.S_NO, S.S_NAME, S.S_EXP, S.S_PRICE, S.S_WEIGHT, S.S_C_NAME, "
+            sql += f"C.C_ADDR, C.C_CEO, C.C_EMP "
+            sql += f"FROM ("
+            sql += f"    SELECT * FROM ("
+            sql += f"        SELECT rownum AS RN, A.* FROM ("
+            sql += f"            SELECT S_NO, S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME "
+            sql += f"            FROM APR07_SNACK "
+            sql += f"            WHERE S_NAME LIKE '%{searchTxt}%' "
+            sql += f"            ORDER BY S_NAME, S_PRICE"
+            sql += f"        ) A"
+            sql += f"    ) "
+            sql += f"    WHERE RN BETWEEN {startPage} AND {endPage}"
+            sql += f") S, ("
+            sql += f"    SELECT * FROM APR07_COMPANY "
+            sql += f"    WHERE C_NAME IN ("
+            sql += f"        SELECT S_C_NAME FROM ("
+            sql += f"            SELECT rownum AS CRN, A.S_C_NAME FROM ("
+            sql += f"                SELECT S_C_NAME "
+            sql += f"                FROM APR07_SNACK "
+            sql += f"                WHERE S_NAME LIKE '%{searchTxt}%' "
+            sql += f"                ORDER BY S_NAME, S_PRICE"
+            sql += f"            ) A"
+            sql += f"        ) "
+            sql += f"        WHERE CRN BETWEEN {startPage} AND {endPage}"
+            sql += f"    )"
+            sql += f") C "
+            sql += f"WHERE S.S_C_NAME = C.C_NAME"
+
+            cur.execute(sql) # 매니저 겸 출력값 저장.
+            
+            snacks2 = []
+            for no, name, exp, price, weight, c_name, c_addr, c_ceo, c_emp in cur:
+                #print(no, name, exp, price, weight, c_name, c_addr, c_ceo, c_emp)
+                snacks2.append(Snack(no, name, exp, price, weight, c_name).SnackInfo(c_addr, c_ceo, c_emp))
+
+            return snacks2
+            
+        except Exception as e:
+            print("ERROR", e)
+            return None
+        finally:
+            DBManager.closeConCur(con, cur)
