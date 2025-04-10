@@ -43,18 +43,20 @@ CREATE TABLE APR07_SNACK(
 );
 
 SELECT * FROM APR07_SNACK;
-INSERT INTO APR07_SNACK VALUES(APR07_SNACK_SEQ.nextval, '새우깡', to_date('20250505', 'YYYYMMDD'), 4000, 300, '농심');
+INSERT INTO APR07_SNACK VALUES(APR07_SNACK_SEQ.nextval, '맛새우', to_date('20250505', 'YYYYMMDD'), 8000, 100, '신라');
 
 -- 한 페이지당 3개 씩 나오게 할 때,
 -- 총 페이지 수?
 
 SELECT * FROM (
 	SELECT rownum AS RN, S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME FROM (
-		SELECT S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME
+		SELECT *
 		FROM APR07_SNACK
 		ORDER BY S_NAME, S_PRICE
 	)
 ) WHERE RN >= 1 AND RN <= 3;
+
+SELECT * FROM (SELECT rownum AS RN, C_NAME, C_ADDR, C_CEO, C_EMP FROM (SELECT * FROM APR07_COMPANY ORDER BY C_NAME)) WHERE RN >= 1 AND RN <= 3;
 
 -- 1*2 + -1 ~~  1*2 + -1 +2 - NOWPAGE = 1 2 3
 -- 2*2 + 0- NOWPAGE = 4 5 6
@@ -62,6 +64,7 @@ SELECT * FROM (
 -- 4*2 + 2 - NOWPAGE - 10 11 12
 -- 5*2 + 3 NOWPAGE 13 14 15
 
+SELECT COUNT(*) FROM APR07_SNACK WHERE S_NAME LIKE '%새%';
 
 -- Oracle 12c 버전 이상 
 SELECT rownum, m_no, m_name, m_price FROM (
@@ -71,6 +74,151 @@ SELECT rownum, m_no, m_name, m_price FROM (
 ) OFFSET 2 ROWS FETCH NEXT 3 ROWS ONLY;
 -- OFFSET 2 ROWS : 앞에서부터 2개의 행은 건너뛰기 -> 3부터 시작
 -- FETCH NEXT 3 ROWS ONLY : 그 다음 3개의 행(3, 4, 5)만 가져와라 
+
+-- 9
+-- 빼뺴로 2500원 50g
+-- 유통기한 : 0000-00-00
+-- 롯대(종로 홍길동 100)
+-- snack *
+-- company addr ceo emp
+
+SELECT S_NAME, S_PRICE, S_WEIGHT, S_EXP, C_NAME, C_ADDR, C_CEO, C_EMP FROM APR07_SNACK s, APR07_COMPANY c WHERE s.S_C_NAME  = c.C_NAME ORDER BY ;
+
+-- 전체 JOIN
+SELECT * FROM (
+	SELECT rownum AS RN, S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME, C_ADDR, C_CEO, C_EMP  FROM (
+		SELECT * FROM APR07_SNACK s, APR07_COMPANY C WHERE s.S_C_NAME = c.C_NAME AND S_NAME LIKE '%새%' ORDER BY S_NAME, S_PRICE
+	)
+) WHERE RN >= 1 AND RN <= 3;
+
+
+SELECT * FROM APR07_SNACK;
+SELECT S_C_NAME, C_ADDR, C_CEO, C_EMP FROM APR07_SNACK s, APR07_COMPANY c WHERE s.S_C_NAME  = c.C_NAME;
+
+
+
+-- 필요한 것 들만 가지고 와서 JOIN
+--	필요한 것들
+--		'새'로 검색해서 3번부터 5번까지 해당하는 과자 - 3개
+--		'새'로 검색해서 3번부터 5번까지 해당하는 과자를 만든 회사 - 1개
+--	만 가져와서 JOIN
+
+
+SELECT * FROM(
+	SELECT rownum AS RN, S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME FROM(
+		SELECT S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME FROM APR07_SNACK WHERE S_NAME LIKE '%새%'
+	)
+) WHERE RN >= 1 AND RN <= 3;
+
+SELECT * FROM(
+	SELECT C_NAME, C_ADDR, C_CEO, C_EMP FROM(
+		SELECT C_NAME, C_ADDR, C_CEO, C_EMP FROM APR07_COMPANY WHERE C_NAME IN (
+			
+			SELECT S_C_NAME FROM(
+				SELECT rownum AS RN, S_C_NAME FROM(
+					SELECT S_C_NAME FROM APR07_SNACK WHERE S_NAME LIKE '%새%'
+				)
+			) WHERE RN >= 1 AND RN <= 3
+		)
+	)
+);
+
+
+-- '새'로 검색해서 3번부터 5번까지 해당하는 과자
+SELECT S_NO, S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME 
+FROM(
+	SELECT rownum AS RN, S_NO, S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME 
+	FROM(
+		SELECT *
+		FROM APR07_SNACK 
+		WHERE S_NAME LIKE '%새%' 
+		ORDER BY S_NAME, S_PRICE
+	)
+)
+WHERE RN BETWEEN 3 AND 5;
+
+
+
+-- '새'로 검색해서 3번부터 5번까지 해당하는 과자를 만든 회사
+SELECT *
+FROM APR07_COMPANY 
+WHERE C_NAME IN (
+	SELECT S_C_NAME 
+	FROM(
+		SELECT rownum AS CRN, S_C_NAME 
+		FROM(
+			SELECT S_C_NAME 
+			FROM APR07_SNACK 
+			WHERE S_NAME LIKE '%새%'
+		)
+	) 
+	WHERE CRN >= 3 AND CRN <= 5
+);
+
+
+
+
+
+SELECT 
+    S.S_NAME, S.S_EXP, S.S_PRICE, S.S_WEIGHT, S.S_C_NAME, 
+    C.C_ADDR, C.C_CEO, C.C_EMP
+FROM (
+    SELECT *
+    FROM (
+        SELECT rownum AS RN, A.*
+        FROM (
+            SELECT S_NO, S_NAME, S_EXP, S_PRICE, S_WEIGHT, S_C_NAME 
+            FROM APR07_SNACK 
+            WHERE S_NAME LIKE '%새%'
+            ORDER BY S_NAME, S_PRICE
+        ) A
+    )
+    WHERE RN BETWEEN 3 AND 5
+) S,
+(
+    SELECT *
+    FROM APR07_COMPANY 
+    WHERE C_NAME IN (
+        SELECT S_C_NAME 
+        FROM (
+            SELECT rownum AS CRN, A.S_C_NAME 
+            FROM (
+                SELECT S_C_NAME 
+                FROM APR07_SNACK 
+                WHERE S_NAME LIKE '%새%'
+                ORDER BY S_NAME, S_PRICE
+            ) A
+        )
+        WHERE CRN BETWEEN 3 AND 5
+    )
+) C
+WHERE S.S_C_NAME = C.C_NAME;
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
