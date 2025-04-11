@@ -1,0 +1,66 @@
+
+-----------------------------------------------------------------------------------------------
+
+OracleDB
+	일반적인 정형데이터 보관
+		-> 보안이 중요 -> 관리자 계정, 유저 생성, 권한, ...
+		-> 규칙을 정의하고 규칙에 맞게 데이터를 관리 -> 비정형에 안맞음
+	OracleDB -> DB -> TableSpace -> Table -> Data
+	-> SQL로 제어.
+
+MongoDB
+	분석을 위한 비정형데이터 보관
+		-> 보안이 안중요해도 됨. -> 계정 시스템이 있기는 한데.. 딱히?
+		-> 정의하지 않아도 진행 가능, 처음 썼을때 없으면 자동 생성됨
+	MongoDB > DB > JS배열 > Data
+			(최초는 test 에 접속)
+	-> NoSQL 
+	-> JavaScript로 제어
+
+-----------------------------------------------------------------------------------------------
+
+1. MongoDB 서버 설치
+
+2. DB 저장될 폴더 확보
+	C:\Hwan\MongoDB
+
+3. MongDB 설치되어 있는 경로로 가서 CMD 실행
+	C:\Program Files\MongoDB\Server\8.0\bin
+
+4. 서버 ON
+	mongd --dbpath (DB 저장될 폴더 경로)
+	mongd --dbpath C:\Hwan\MongoDB  (이렇게 키면 외부에서 접속을 못함.)
+	>> 	mongd --dbpath (DB 저장될 폴더 경로) --bind_ip_all
+		mongod --dbpath C:\Hwan\MongoDB --bind_ip_all
+
+5. 서버 OFF
+	CMD창 닫기
+or	Ctrl + C (리눅스 기반에서 종료 커맨드)
+
+
+-----------------------------------------------------------------------------------------------
+
+1. MongoDB 접속 프로그램 설치
+	https://www.mongodb.com/try/download/shell
+	=> MongoDB Shell Download
+
+2. 압축 해제
+
+3. MongoDB Shell 다운받은 경로에 가서 cmd 접속 
+	C:\Users\soldesk\Desktop\mongosh-2.5.0-win32-x64\mongosh-2.5.0-win32-x64\bin
+	(bin까지)
+
+4. 접속
+	mongosh 서버IP주소
+	mongosh 195.168.9.116
+
+-----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
