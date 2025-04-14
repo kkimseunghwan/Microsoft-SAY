@@ -51,8 +51,8 @@ q = quote(q) # (URL인코딩)
 print(q)
 
 #request header
-h = {"X-Naver-Client-ID":"sJ78Ve7Q9XT62bDLXBii",
-     "X-Naver-Client-Secret":"wu2TMBQ_BV"}
+h = {"X-Naver-Client-ID":"",
+     "X-Naver-Client-Secret":""}
 
 hc = HTTPSConnection("openapi.naver.com") # 컴퓨터 주소랑, 있다면 포트까지 (주소:포트)형식
 hc.request("GET", "/v1/search/news.xml?query="+q, headers=h) # 남은 주소 다 # /폴더/파일?변수명=값?변수명...
