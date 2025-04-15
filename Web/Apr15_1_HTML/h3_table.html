@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Apr15_Table</title>
+
+    </head>
+    <body>
+        <!-- 
+            table
+                게시판처럼 진짜 표 모양 필요할 때.
+                실제) 웹디자이너가 드림위버같은걸로 좌표조절
+                우리) 디자인을 안할수는 없고
+                    VScode로 코딩하면서 좌표조절? -> 라고할뻔
+                    -> table로 사이트 레이아웃 진행
+
+        -->
+        <table border="1" width="300px" height="300px">
+            <tr> <!-- 칸을 만들고 나눠서 align을 통해 정렬시키기 편함.-->
+                <td align="right">1</td>
+                <th>2</th>
+                <td valign="top">3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5</td>
+                <th align="right" valign="bottom">6</th>
+            </tr>
+        </table>
+        <hr>
+        <table border="1" width="300px" height="300px">
+            <tr> <!-- 칸을 만들고 나눠서 align을 통해 정렬시키기 편함.-->
+                <td>1</td>
+                <td colspan="2">2</td>
+            </tr>
+            <tr> 
+                <td>2</td>
+                <td>2</td>
+                <td rowspan="3">3</td>
+            </tr>
+            <tr> 
+                <td>2</td>
+                <td>2</td>
+            </tr>
+            <tr> 
+                <td>2</td>
+                <td>2</td>
+            </tr>
+        </table>
+        <hr>
+        <table border="1" width="300px" height="300px">
+            <tr> <!-- 칸을 만들고 나눠서 align을 통해 정렬시키기 편함.-->
+                <td colspan="2">1</td>
+                <td rowspan="2">1</td>
+            </tr>
+            <tr> 
+                <td rowspan="2">2</td>
+                <td>2</td>
+            </tr>
+            <tr> 
+                <td colspan="2">2</td>
+            </tr>
+        </table>
+    </body>
+</html>

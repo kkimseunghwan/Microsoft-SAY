@@ -1,0 +1,42 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Apr15_HTML</title>
+    </head>
+    <body>
+        <!--
+            경로
+                절대경로 : C:\Hwan\workspace\Web\Apr15_1_HTML\image01.jpg
+                    이걸 서버에서 실행할건데, 서버에서 저런 경로는 없음
+                    -> 활용도가 낮음
+                상대경로 : 지금 작업중인 이 HTML파일 위치 기준 => image01.jpg
+                    이 프로젝트 통째로 서버로 보내서 실행할거.
+        -->
+        <!--
+            이미지 사이즈 조절
+                1) 안해야지. 그 사이즈의 이미지를 그대로 사용
+                2) 굳이굳이
+                    사이즈
+                        100 : 100px
+                        100px : 100px
+                        100% : 부모의 사이즈의 상대 사이즈
+                        (부모:현재 위치에서 상위 범위 = <body>)
+                        가로든 세로든 둘 중 하나만 조절하면 나머지 하나는 비율따라 알아서 조절됨.
+
+        -->
+        <img src="image01.jpg" width="300px">
+        <!--
+            HTML 4.01 때 까지는 img말고 다른거는 embed로(add-on이 필요할수도)
+            HTML 5에서 멀티미디어 관련된 것들 추가
+                됐는데, 브라우저마다 지원하는게 다름
+                됐는데, HTML5를 주력으로 써도 되나? (IE 같은 경우는 적용이 안될수도)
+        -->
+        <audio src="음악파일" controls></audio> <!-- MP3 파일 -->
+        <embed src="">
+
+
+    </body>
+</html>
