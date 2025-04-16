@@ -1,0 +1,101 @@
+@font-face{
+    /* 
+        CSS3에서 추가된 웹폰트
+            사용자컴에 설치가 안되어있어도 폰트 사용 가능하게
+            1) CSS3 -> IE에서 안될거고
+            2) 폰트파일은 용량이 큰데, 서버에서 사용자에게 제공 서버가 느리면?
+
+    */
+    font-family: "dm";
+    src: url("../font/A클리프E.TTF");
+}
+body{
+    /* 기본여백 삭제 원래 기본여백이 8인가 7픽셀정도로 디폴트값임 */
+    margin: 0px;
+    padding: 0px;
+    
+    height: 100vh;
+    /*
+    background-image: url("../image/RainbowBackGround.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    color: white;
+    */
+
+    
+}
+a{
+    /* 밑줄 삭제 */
+    text-decoration: none;
+}
+
+#siteTitleArea{
+    width: 100%;
+}
+
+#siteTitle{
+    /* 요즘 밑의 해상도는 거의 없음 그래서 디폴트가 1200?
+        640x480
+        800x600
+        1024x768
+        1200x1024
+    */
+    align-self: center;
+    
+
+    width: 1200px;
+    height: 120px;
+    font-family: "dm";
+    font-size: 30pt;
+    color:black;
+    text-shadow: 3px 3px 5px #BA68C8;
+}
+
+#siteMenu a{
+    transition: all 0.1s ease-out; /* 속석명 시간 속도조절
+                                            ease-in : 점점 빨라짐
+                                            ease-out : 점점 느려짐
+                                            linear : 등속
+                                    CSS3에 추가된 기능
+    */
+    text-decoration: none;
+    color: #B39DDB;
+    margin-right: 100px;
+    font-weight: 0; /*0~900 사이 900이 젤굵음 폰트굵기*/
+    font-family: "dm";
+    font-size: 25pt;
+    color: black;
+
+}
+
+
+#siteMenuArea{
+    border-top: #C5CAE9 solid 3px;
+    border-bottom: #C5CAE9 solid 3px;
+}
+
+#siteMenu{
+    width: 1200px;
+    height: 600px;
+}
+
+#siteMenu a:hover{
+    color: red;
+    font-size: 100px;
+
+}
+
+#siteContentArea{
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 1200px;
+    padding-top: 150px;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}

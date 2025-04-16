@@ -1,0 +1,76 @@
+@font-face {
+    /* 
+        CSS3에서 추가된 웹폰트 
+            사용자컴에 설치가 안되어있어도 폰트 사용 가능하게
+            1) CSS3 -> IE에서 안될거고
+            2) 폰트파일은 용량이 큰데, 서버에서 사용자에게 제공
+                서버가 느리면?
+            -> 실무에서는 이미지로 작업해오지
+    */
+    font-family: "dm";
+    src: url("DOSMyungjo.ttf");
+}
+a{
+    /* 밑줄 삭제 */
+    text-decoration: none;
+}
+body{
+    /* 기본여백 삭제 */
+    margin: 0px;
+    padding: 0px;
+}
+#siteTitleArea{
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    background-color: #ffffffcc;
+}
+#siteTitle{
+    /* 640x480 -> 800x600 -> 1024x768 -> 1280x1024 */
+    width: 1200px;
+    height: 90px;
+    font-family: "dm";
+    font-size: 30pt;
+    color:#512DA8;
+    text-shadow: 3px 3px 5px #B39DDB;
+}
+#siteMenuArea{
+    background-color: #512DA8;
+}
+#siteMenu{
+    width: 1200px;
+    height: 45px;
+}
+#siteMenu a{
+    transition: all 0.3s ease-in; /* 속성명 시간 속도조절 
+                                                    ease-in : 점점빨라짐
+                                                    ease-out : 점점느려짐
+                                                    linear : 등속 
+                                     CSS3에 추가된...
+                                  */
+    font-family: "dm";
+    color: white;
+    margin-right: 20px;
+    font-weight: 900; /* 굵게 */
+}
+#siteMenu a:hover{
+    color:black;
+    text-shadow: 0px 0px 15px white;
+}
+#siteContentArea{
+    /* 단독 테이블 가운데 정렬 */
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 1200px;
+    padding-top: 150px;
+}
+::-webkit-scrollbar{
+    /* (크롬, 엣지에서만) */
+    display: none;
+}
+#homeImg{
+    margin-top: 150px;
+    width: 50%;
+}

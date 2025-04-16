@@ -1,0 +1,23 @@
+body{
+    background-color: powderblue;
+}
+div{
+    margin: 20px;
+    padding: 10px;
+    border: lightsalmon 5px solid;
+    /* color width type
+        
+    type
+        solid double
+        dotted dashed
+        inset outset
+        ridge groove
+    */
+
+    width: 100px;
+    height: 50px;
+
+    position: fixed;
+    left: 200px;
+    top: 300px
+}
