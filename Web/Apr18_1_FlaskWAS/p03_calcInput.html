@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr18_Calculate_Input</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <a href="http://195.168.9.139:1234/calculate.do?xxx=10&yyy=5">10이랑 5계산하기</a>
+    <hr>
+    <!--
+        form + burron
+            fomr 속의 button 누르면
+                action에 있는 쪽으로 요청을 날려줌.
+        form + input
+            input에 넣은 값을 요청 파라미터로 만들어서
+                (name이 변수명, 페이지에서 입력한 것이 값이되어)
+            action에 있는 쪽으로 요청을 날려줌
+    -->
+    <form action="http://195.168.9.139:1234/calculate.do" method="post">
+        xxx : <input name="xxx"> <br>
+        yyy : <input name="yyy"> <br>
+        <button>ㄱㄱ</button>
+    </form>
+    <hr>
+    <form action="http://195.168.9.139:1234/gugudan.show" method="post">
+        start : <input name="start"> <br>
+        end : <input name="end"> <br>
+        <button>ㄱㄱ</button>
+    </form>
+
+</body>
+</head>

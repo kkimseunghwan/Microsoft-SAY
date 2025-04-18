@@ -1,0 +1,22 @@
+
+.anImg{
+    background-color: white;
+    box-shadow: 3px 3px 3px black;    
+    margin: 25px;
+    /* 공간이 비어있어도 옆으로 가지 않음. */
+    float: left;
+}
+
+.anImg .imgTD{
+    height: 220px;
+    padding: 10px;
+}
+
+.anImg .imgTD img{
+    max-height: 200px;
+}
+
+.anImg .dataID{
+    font-size: 8pt;
+    padding: 5px;
+}

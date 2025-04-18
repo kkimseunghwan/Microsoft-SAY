@@ -1,0 +1,26 @@
+#noticeBBS{
+    width: 400px;
+
+    /* 제목 줄에만 들어갈거 */
+    background-color: #512da8;
+    color: white;
+
+    /* TD간의 간격 */
+    border-spacing: 0px;
+}
+
+#noticeBBS .dataTR{ /* 포함 관계 */
+    /* 내용 줄의 디자인 */
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+#noticeBBS .dataTR:hover{
+    background-color: #D1C4E9;
+}
+
+#noticeBBS td{
+    border-bottom: #D1C4E9 solid 1px;
+    height: 30px;
+}

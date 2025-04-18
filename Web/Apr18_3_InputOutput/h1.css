@@ -1,0 +1,66 @@
+@font-face{
+    font-family: "my";
+    src: url("")
+}
+
+body{
+    background-color: white;
+}
+table{
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: beige;
+    box-shadow: 3px 3px 3px black;
+    width: 400px;
+}
+
+th{
+    font-weight: bold;
+    font-size: 20px;
+    height: 100px;
+}
+
+.id_txt, .pw_txt{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+}
+.btn {
+    height: 50px;
+}
+
+.btn .btnType{
+    margin: 10px;
+    padding: 4px;
+    width: 80%;
+    font-weight: bold;
+}
+
+.btn .btnType:hover{
+    background-color: lightgray;
+    cursor: pointer;
+
+}
+
+input{
+    outline: none;
+}
+
+.textType{
+    width: 300px;
+    height: 35px;
+    border: none;
+    background-color: transparent;
+    border-bottom: black solid 2px;
+    font-size: 12pt;
+    text-align: center;
+}
+
+.textType:focus{
+    border-bottom: red solid 2px;
+}
+
+.textType::placeholder {
+    color: orange;
+}
