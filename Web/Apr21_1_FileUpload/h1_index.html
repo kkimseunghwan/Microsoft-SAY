@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr18_InputOutput</title>
+    <link rel="stylesheet" href="h1.css">
+</head>
+<body>
+    <!--
+        Fomr을 쓰면 편함
+            button, submit 타입/image 타입의 input을 누르면,
+            form 속에 있는 Input
+                name을 reqParam 변수명으로
+                내용을 전기신호로 바꿔서(인코딩) 
+            action에 써놓은 쪽으로 요청해줌.
+
+            파일 업로드
+            1) ~~~?photo= ??? 
+                => reqParam이 주소에 실려가는 GET 방식은 파일 표현 불가
+                =>> POST 방식이여야.
+            2) 기존 인코딩 방식은 글자는 인코딩이 가능한데, 파일이 인코딩 불가.
+                > 인코딩 방식을 바꿔야 함.
+    -->
+    <form action="http://195.168.9.139:1234/file.up" method="post" enctype="multipart/form-data">
+        <table>
+            제목 : <input name="title"><p>
+            사진 : <input name="photo" type="file"><p>
+            <button>ㄱㄱ</button>
+            </tr>
+        </table>
+
+    </form>
+
+
+</body>
+</head>

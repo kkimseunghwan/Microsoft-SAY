@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr21</title>
+    <script>
+
+        // 1) 함수 정의
+        // 2) HTML DOM 객체의 onXXX 속성에 연결
+        // -> 작업 형태상 작업이 불편함.
+        // 문법이 길다 ++ 인터프리터 방식.
+        // -> 에러 잡기가 최악.
+        // => 역사적으로 개발자들에게 외면당해왔음.
+        // 바닐라 JS는 여전히 불편함.
+        // ==> JQuery라는 JS 라이브러리가 나오면서 상황이 나아짐.
+        //      본격적으로 발전된 JS라이브러리 : React / Vue
+
+        // callback함수
+        //  직접 호출x, 이벤트에 연결시켜놔서
+        //  이벤트가 발생하면 자동으로 호출되는 함수.
+        function printHaHa() {
+            alert("ㅎㅎㅎ");
+        }
+
+        function printGogo() {
+            alert("ㄱㄱㄱ");
+        }
+
+
+
+
+    </script> 
+</head>
+<body>
+    <h1 onclick="printHaHa();">하하하</h1>
+    <h2 ondblclick="printGogo();">ㄱㄱㄱ</h2>
+    <input onkeyup="printGogo();">
+    
+
+
+</body>
+</head>
