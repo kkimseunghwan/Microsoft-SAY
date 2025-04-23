@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>비만도 검사</title>
+    <script src="hwanValidChecker.js"></script>
+    <script src="j1_Check.js"></script>
+    <link rel="stylesheet" href="h1_.css">
+</head>
+<body>
+    <form name="joinForm"
+        method="post" 
+        enctype="multipart/form-data" 
+        onsubmit="return check();" 
+        action="http://195.168.9.139:8888/bmi.sign.up">
+        <table>
+            <tr>
+                <th>
+                    비만도 검사
+                </th>
+            </tr>
+            <tr>
+                <td align="center" class="text_td">
+                    <input placeholder="이름" name="name" maxlength="10" autocomplete="off" class="textType">
+                </td>
+            </tr>
+            <tr>
+                <td align="center" class="text_td">
+                    <input placeholder="키" name="height" maxlength="3" autocomplete="off" class="textType">
+                </td>
+            </tr>
+            <tr>
+                <td align="center" class="text_td">
+                    <input placeholder="몸무게" name="weight" maxlength="3" autocomplete="off" class="textType">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    사진 &nbsp; <input name="profile" type="file" class="fileType"><p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <button>검사 결과</button>
+                </td>
+            </tr>
+            
+        </table>
+    </form>
+    
+</body>
+</html>
