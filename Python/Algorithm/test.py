@@ -1,5 +1,6 @@
-def solution(my_string):
-    return ''.join(chr(ord(i)+32) if i.isupper() else chr(ord(i)-32) for i in my_string )
+def solution(s):
+    s = s.split(' ')
+    return sum(int(s[i]) if s[i] != 'Z' else -int(s[i-1]) for i in range(len(s)))
 
+print(solution("1 2 Z 3"))
 
-print(solution("cccCCC"))

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>비</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        // kwonValidChecker.js = 유효성 검사 라이브러리
+        // jQuery.js = JS 전반적 다 들어있는 라이브러리
+        // react.js = JS전반적 + OOP 라이브러리
+
+        // 문법
+        //      jQuery(선택자).이벤트(콜백함수);
+        //      jQuery는 $ 로 줄여쓰기 가능 == $.(선택자).이벤트(콜백함수);
+        
+        // 선택자
+        //      기존 JS의 내장 객체
+        // $(document).ready(function abcd() {
+        //     alert("ㅋ")
+        // }); // = body의 load 이벤트랑 같음
+        //      -> MAIN 역학
+
+        // 이벤트
+        //      기존 JS의 onXXX에서 on만 뺴고
+        $(function () {
+            var si = $("#secondInput");
+
+            $("button").click(function() {
+                alert(si.val());
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    <input>
+    <input id="secondInput">
+    <button>ㅋ</button>
+    <button>ㅋ</button>
+    <button>ㅋ</button>
+    <button>ㅋ</button>
+    <button>ㅋ</button>
+    <button>ㅋ</button>
+
+    
+</body>
+</html>

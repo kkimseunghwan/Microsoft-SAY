@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>비</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        $("$here").click(function () {
+            if($("$here").css("top") == "-30px") {
+                $("$here").css("top", "0px")
+            }else{
+                $("$here").css("top", "-30px")
+            };
+        });
+
+    </script>
+    <style>
+        table {
+            position: fixed;
+            top: -30px;
+            transition: all 0.4s, ease;
+        }
+
+    </style>
+</head>
+<body>
+    <table border="=1">
+        <tr>
+            <td>
+                <a href="https://www.naver.comd">네이버로</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://www.google.comd">구글</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://www.daum.net">다음으로</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center" id=""here>
+                <a href="https://www.daum.net">다음으로</a>
+            </td>
+        </tr>
+
+
+    </table>
+    
+</body>
+</html>

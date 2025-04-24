@@ -16,13 +16,9 @@ function check() {
         return false;
     }
 
-
     alert(pwField.value)
     alert(pwChkField.value)
     alert(ageField.value)
-
-
-
 
     if(isEmpty(pwField) || lessThan(pwField, 5) 
         || notEqual(pwField, pwChkField)

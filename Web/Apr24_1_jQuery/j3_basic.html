@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>비</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        $(function() {
+            // event-driven progremming
+            //      이벤트에 콜백함수 연결하고 ...
+
+            // h1들 더블클릭하면 여기 호출
+            // h1들에 더블클릭 이벤트가 발생하면 test함수를 호출하도록 연결해두기.
+            $("h1").dblclick(function test() {
+                for (var i = 0; i < 5; i++){
+                    alert("ㅋㅋㅋ");
+                }
+                
+                // h2 들에 클릭 이벤트 터지면 asd함수가 호출되도록
+                // 근데 이 코드의 위치가 상위 test()의 내부.
+                // h1 이벤트가 한번이라도 실행이 되야 사용 가능함.
+                $("h2").click(function asd() {
+                    alert("아무글자");
+                });
+            });
+
+
+            // h3 클릭 시,
+            // input에 쓴 내용 alert
+            $("h3").click(function input_alert() {
+                var i = $("#inputType");
+                // JS는 오버로딩이 다능.
+                // jQuery 문법의 특징임
+                //      ~.val() : 값 '가져오기'
+                //      ~.val(내용) : 값 '바꾸기'
+                // alert(i.val());
+                i.val("ㅋㅋㅋ");
+            });
+
+
+        }); // body에 있는거 화면에 다 나오고 나서.
+
+
+    </script>
+
+</head>
+<body>
+    <h1>
+        ㅋㅋㅋ
+    </h1>
+
+    <h2>
+        alert
+    </h2>
+
+    <h3>ㄱㄱㄱ</h3>
+
+    <input id="inputType">
+    
+</body>
+</html>

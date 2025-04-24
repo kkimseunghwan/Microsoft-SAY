@@ -57,5 +57,5 @@ def jsonTest():
 
     # 결과를 외부에서도 사용 가능하게 하려면?
     # Access-Control-Allow-Origin 이라는 헤더를 세팅하면 사용 가능함
-    ㅗ = {"Access-Control-Allow-Origin" : "1.2.3.4"}
+    resHeader = {"Access-Control-Allow-Origin" : "1.2.3.4"}
     return JSONResponse(jsonn)

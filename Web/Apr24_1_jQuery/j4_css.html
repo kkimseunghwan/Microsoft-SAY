@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>비</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        $(function() {
+            // CSS 수정/추가
+            //      $(선택자).css("속성명", "값")
+
+            //b1클릭 시 alert
+            $("#b1").click(function() {
+                alert("우효");
+                $("h1").css("color", "blue");
+            })
+
+            //b2 한번 누르면 녹색. 또 한번 누르면 빨강색
+            var col = true;
+            $("#b2").click(function() {
+                if(col){
+                    $("h1").css("color", "green");
+                }else{
+                    $("h1").css("color", "red");
+                }
+                col = !col
+            })
+
+            //b3 한번 누르면 글자색, 배경색 변경경
+            $("#b3").click(function() {
+                // 한번에 이어서 쭉 쓸수는 있긴 함.
+                $("h1").css("color", "orange").css("background-color", "grey");
+            })
+
+            //b4클릭 시 글자 색 alert
+            $("#b4").click(function() {
+                alert($("h1").css("color"));
+            })
+
+            //b5클릭 시 좌표 조절
+            $("#b5").click(function() {
+                $("img").css("top", 300).css("left", 100);
+            })
+
+            // 랜덤하게 계속 싸돌아다니게.
+            //b6클릭 시 좌표 조절
+            let qwe; // 이미지 이동용 interval
+            let tail; // 잔상 생성용 interval
+
+            $("#b6").click(function () {
+                const $main = $("#main-img");
+
+                // 이미지 이동 (1초마다)
+                qwe = setInterval(function () {
+                    var top = Math.random() * 1080;
+                    var left = Math.random() * 1080;
+                    $main.css("top", top).css("left", left);
+                }, 300);
+
+                // 잔상 찍기 (100ms마다)
+                tail = setInterval(function () {
+                    var currentTop = $main.css("top");
+                    var currentLeft = $main.css("left");
+
+                    var clone = $main.clone();
+                    clone.removeAttr("id");
+                    clone.css({
+                        "position": "fixed",
+                        "top": currentTop,
+                        "left": currentLeft,
+                        "opacity": "0.4",
+                        "z-index": -1,
+                        "pointer-events": "none",
+                        "transition": "opacity 1.5s ease-out",
+                        "width": $main.css("width")
+                    });
+
+                    $("body").append(clone);
+
+                    setTimeout(function () {
+                        clone.css("opacity", "0");
+                    }, 10);
+
+                    setTimeout(function () {
+                        clone.remove();
+                    }, 2000);
+                }, 30);
+            });
+
+            // 이미지 클릭하면 정지
+            $("img").click(function () {
+                clearInterval(qwe);
+                clearInterval(tail);
+            });
+
+
+
+
+        });
+
+
+    </script>
+
+    <style>
+        h1 {
+            color: red;
+        }
+
+        img {
+            transition: all 0.5s ease;
+            position: fixed;
+            width: 50px;
+            top: 0px;
+            left: 0px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <h1>ㅋㅋㅋ</h1>
+    <button id="b1">바꾸기</button>
+    <button id="b2">글자색 바꾸기</button>
+    <button id="b3">글자색 배경색 바꾸기</button>
+    <button id="b4">글자색 확인</button>
+    <hr>
+    <img id="main-img" src="android_images.png"> <br>
+    <button id="b5">ㄱㄱ</button>
+    <button id="b6">랜덤ㄱㄱ</button>
+    
+    
+</body>
+</html>
