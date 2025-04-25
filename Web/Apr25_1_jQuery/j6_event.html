@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr25</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        function addBtn() {
+            var m = $("<button></button>").attr("onclick", "addBtn()").text("ㅋㅋㅋ"); // 없는거 만들기
+            $("body").prepend(m);
+
+        }
+
+        // // jQuery를 써서 동적으로 추가된 DOM객체들의 이벤트 처리는 어떻게? -> 안됨ㅋ
+        // // 콜백함수에 값 전달?
+        // $(function() {
+        //     // 모든 버튼들..
+        //     $("button").click(function() {
+        //         var m = $("<button></button>").text("ㅋㅋㅋ"); // 없는거 만들기
+        //         $("body").prepend(m);
+        //     });
+
+
+
+
+
+        // }); // body에 있는거 화면에 다 나오고 나서
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <button onclick="addBtn()">ㅋㅋㅋ</button>
+
+</body>
+</html>

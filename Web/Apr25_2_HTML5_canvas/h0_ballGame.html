@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr25</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+
+        $(function() {            
+            // 캔버스 불러오기
+            var paper = document.getElementById("c");
+            var pen = paper.getContext("2d");
+            pen.save();
+
+            score = 0
+            getScore = false;
+            function scoreUpdate(get) {
+                if(get){
+                    score++;
+                }else{
+                    score = 0;
+                }
+
+                $("h2").text("점수 : " + score * 10);
+            }
+
+
+            ///////////////////////////////////////////////
+
+            // playerBox
+
+            xplayer = 0;
+            isplayerMove = true;
+            bpxScale = 80;
+
+            $("canvas").mousemove(function(ee) {
+                $("h3").text("mousemove" + ee.pageX + " " + ee.pageY )
+                if(isplayerMove){
+                    xplayer = ee.pageX;
+                }
+            });
+            
+            ///////////////////////////////////////////////
+
+            xlastPos = 100; 
+            ylastPos = 5;
+
+            xmove = 1;
+            ymove = 1;
+
+            speed = 10
+
+            vecNormal = Math.sqrt(xmove*xmove + ymove*ymove)
+            xmove = xmove/vecNormal;
+            ymove = ymove/vecNormal;
+
+            // 빤짝빤짝
+            setInterval(function() {
+                pen.save();
+                pen.fillStyle = "#FFFFFF44";
+                pen.fillRect(0,0,500,500);
+                
+                ///
+                pen.restore();
+
+                if(xplayer+bpxScale*2 > 500) {
+                    xplayer = 500 - bpxScale*2;
+                    isplayerMove = false;
+                }else{
+                    isplayerMove = true;
+                }
+
+                pen.fillRect(xplayer, 450, bpxScale*2, 20); //x, y, w, h
+                ///
+                
+                xlastPos += xmove * speed;
+                ylastPos += ymove * speed;
+
+                var _image_ = new Image();
+                _image_.src = "img/ball.png"
+                _image_.onload = function() {
+                    pen.drawImage(_image_, xlastPos, ylastPos, 30, 30); 
+                };
+
+                if((ylastPos+20+15 > 450) && (xplayer < xlastPos) && (xlastPos < xplayer+bpxScale*2)) {
+                    ymove = -1 + Math.random()*0.5
+                    if(!getScore) scoreUpdate(true);
+                    getScore = true;
+                    speed += 0.2
+                }
+
+                if(xlastPos > 470){
+                    xmove = -1 + Math.random()*0.5
+                    getScore = false;
+                }
+                if(xlastPos < 0){
+                    xmove = 1 + Math.random()*0.5
+                    getScore = false;
+                }
+                if(ylastPos < 0){
+                    ymove = 1 + Math.random()*0.5
+                    getScore = false;
+                }
+
+                if(ylastPos > 470 || (ylastPos > 450)) {
+                    //ymove = -1 + Math.random()*0.5
+                    ylastPos = 50
+                    speed = 10
+                    scoreUpdate(false);
+                    getScore = false;
+                }
+
+                vecNormal = Math.sqrt(xmove*xmove + ymove*ymove)
+                xmove = xmove/vecNormal;
+                ymove = ymove/vecNormal;
+
+            }, 25);
+            // xmove = 5 + (Math.random() * 2) - 1;
+
+        });
+    </script>
+    <style>
+        canvas {
+            border: solid black 3px;
+            color: rgba(red, green, blue, alpha);
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="c" width="500px" height="500px">
+
+    </canvas>
+
+    <h2>점수 : 0</h2>
+
+    <h3>마우스</h3>
+
+
+</body>
+</html>

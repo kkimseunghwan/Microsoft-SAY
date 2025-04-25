@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr25</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        $(function() {
+
+            var i = 1;
+            setInterval(function () {
+                $("img").attr("src", "img/hero_walk_0"+i+".png");
+                
+                i++;
+                if(i > 5) i = 1
+            }, 200);
+
+
+
+
+        });
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <img src="img/hero_walk_01.png">
+
+
+</body>
+</html>

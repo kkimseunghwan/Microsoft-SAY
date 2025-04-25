@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr25</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        $(function() {
+            // 캔버스 불러오기
+            var paper = document.getElementById("c");
+            var pen = paper.getContext("2d");
+
+            // 선그리기
+            pen.beginPath();
+            pen.moveTo(100, 150);
+            pen.lineTo(400, 150);
+            pen.closePath();
+
+            pen.stroke();
+
+            // 객체 생성할 때.
+            // var a = new Dog();
+            var _image_ = new Image();
+            _image_.src = "img/android_images.png"
+            _image_.onload = function() {
+                pen.drawImage(_image_, 210, 60, 50, 60); 
+            };
+
+
+
+
+
+        });
+    </script>
+    <style>
+        canvas {
+            border: solid black 3px;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="c" width="500px" height="500px">
+
+    </canvas>
+
+
+</body>
+</html>

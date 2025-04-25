@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr25</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        $(function() {
+            // 캔버스 불러오기
+            var paper = document.getElementById("c");
+            var pen = paper.getContext("2d");
+
+            // 사각형
+            
+            pen.fillStyle = "red"; // 도형 색깔
+            pen.strokeStyle = "blue" // 선 색깔
+            pen.lineWidth = "10" // 두께
+
+            pen.fillRect(10, 20, 100, 50); //x, y, w, h
+
+            pen.save();
+
+            //pen 그림자
+            pen.shadowOffsetX = 3;
+            pen.shadowOffsetY = 5;
+            pen.shadowBlur = 7;
+            pen.shadowColor = "green";
+
+            // pen.fillRect(110, 70, 50, 30); 
+
+            // $("#c").mousemove(function(e) {
+            //     pen.fillRect(e.pageX, e.pageY, 30, 30);
+            // });
+            
+            // 저장된 펜 설정 불러오기
+            pen.restore();
+
+            pen.strokeStyle = "skyblue" // 선 색깔
+            pen.lineWidth = "5" // 두께
+
+            pen.shadowOffsetX = 0;
+            pen.shadowOffsetY = 0;
+            pen.shadowBlur = 25;
+            pen.shadowColor = "dodgerblue";
+
+            // 선그리기
+            pen.beginPath();
+            pen.moveTo(100, 150);
+            pen.lineTo(400, 150);
+
+            pen.moveTo(400, 150);
+            pen.lineTo(150, 330);
+
+            pen.moveTo(150, 330);
+            pen.lineTo(250, 50);
+
+            pen.moveTo(250, 50);
+            pen.lineTo(350, 330);
+
+            pen.moveTo(350, 330);
+            pen.lineTo(100, 150);
+            pen.closePath();
+
+            pen.stroke();
+
+
+
+
+
+        });
+    </script>
+    <style>
+        canvas {
+            background-color: black;
+            border: solid black 3px;
+            color: deepskyblue;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="c" width="500px" height="500px">
+
+    </canvas>
+
+
+</body>
+</html>

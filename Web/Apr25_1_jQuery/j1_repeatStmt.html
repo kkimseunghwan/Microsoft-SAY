@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr25</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        // for, for of, while
+        $(function() {
+            // DOM 객체 탐색용 -> XML 파싱.
+            //$(선택자).each(콜백함수);
+            $("h1").each(function(iii, vvv) { // iii 인덱스 0, 1, 2, .. // vvv 각각 돔 객체
+                $(vvv).css("font-size", (iii+1)*10+"pt");
+                alert(iii);
+            });
+
+            //////////////////////////////////////////////////////
+
+            var dogs = [
+            { name: "후추", age: 3 },
+            { name: "호초", age: 2 },
+            { name: "흐츠", age: 1 }
+            ];
+            // JS 배열 탐색용 -> JSON 파싱
+            // $.each(배열, 콜백함수);
+            $.each(dogs, function(index, value) {
+                alert(value.name)
+                alert(value.age)
+            });
+
+            //////////////////////////////////////////////////////
+
+            var css = [
+                {"c":"red", "bgc":"black"},
+                {"c":"green", "bgc":"lightblue"},
+                {"c":"pink", "bgc":"cyan"}
+            ];
+
+            $("h2").each(function(index, value) {
+                $(value).css("color", css[index].c)
+                $(value).css("background-color", css[index].bgc)
+            });
+
+
+
+
+
+
+
+
+
+
+
+        });
+    </script>
+    <style>
+        body {
+        }
+
+    </style>
+</head>
+<body>
+    <h2>가가가</h2>
+    <h2>나나나</h2>
+    <h2>다다다</h2>
+
+    <h1>ㅋㅋㅋ</h1>
+    <h1>ㅎㅎㅎ</h1>
+    <h1>ㅇㅇㅇ</h1>
+    
+</body>
+</html>

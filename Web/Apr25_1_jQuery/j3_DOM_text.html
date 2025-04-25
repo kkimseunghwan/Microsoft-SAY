@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Apr25</title>
+    <script src="jQuery.js"></script>
+
+    <script>
+        $(function() {
+            $("#b1").click(function() {
+                // .text(바꿀꺼) : 수정
+                // $("a").text("<b>ㅋㅋㅋㅋㅋㅋ</b>")
+                // .html(바꿀꺼)
+                $("a").html(
+                    "<b>ㅋㅋㅋㅋㅋㅋ</b>"
+                )
+
+            });
+
+            $("#b2").click(function() {
+                alert($("a").text())
+
+            });
+
+
+        });
+    </script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <a href="https://www.naver.com">네이버로</a>
+    <button id="b1">수정</button>
+    <button id="b2">확인</button>
+
+</body>
+</html>
