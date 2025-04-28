@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ㅋ</title>
+
+    <script src="jQuery.js"></script>
+    <script>
+        $(function() {
+
+            // 🔵 $("input").keydown(function(e) {...})
+            // 모든 <input> 태그에 대해 키를 누를 때 (keydown 이벤트 발생 시) 실행할 함수 등록
+            $("input").keydown(function(e) {
+                
+                // 🔵 e.keyCode: 눌린 키의 아스키 코드값
+                // 예를 들어 'A' 키를 누르면 e.keyCode == 65
+                
+                if (e.keyCode == 65) { // 65는 대문자 'A'의 keyCode
+                    return false; 
+                    // "A"키를 눌렀을 때 입력 자체를 막는다 (이벤트 기본 동작 중지)
+                }
+            });
+
+            // 🔵 다시 $("input").keydown(function(e) {...})
+            // 두 번째 keydown 이벤트 핸들러 등록
+            $("input").keydown(function(e) {
+
+                // 🔵 e.keyCode == 13
+                // 엔터(Enter) 키를 눌렀을 때
+
+                if (e.keyCode == 13) { // 13은 Enter 키
+                    alert("엔터침");
+                    // Enter 키를 누르면 알림창(alert)이 뜬다
+                }
+            });
+            var img = document.getElementById("myImage");
+
+            //37<, 38ㅅ, 39>, 40V
+            $("html").keydown(function(e) {
+                if (e.keyCode == 37) {
+                    $("img").css("left", $("img").offset().left - 10 + "px");
+                }
+                if (e.keyCode == 38) {
+                    $("img").css("top", $("img").offset().top - 10 + "px");
+                }
+                if (e.keyCode == 39) {
+                    $("img").css("left", $("img").offset().left + 10 + "px");
+                }
+
+                if (e.keyCode == 40) {
+                    $("img").css("top", $("img").offset().top + 10 + "px");
+                }
+            });
+        });
+    </script>
+    <style>
+        img {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 50px;
+            height: 50px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <input>
+    <hr>
+    <img src="ball.png">
+
+</body>
+
+</html>

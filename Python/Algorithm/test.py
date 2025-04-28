@@ -1,31 +1,17 @@
-
-def solution(numbers):
-    numStr = {
-        "zero": '0',
-        "one": '1',
-        "two": '2',
-        "three": '3',
-        "four": '4',
-        "five": '5',
-        "six": '6',
-        "seven": '7',
-        "eight": '8',
-        "nine": '9'
-    }
-    answer = ''
-    pivot = 0
-    while numbers:
-        if input():
-            print(pivot, numbers[:pivot], "//", numbers, answer)
-            if numbers[:pivot] in numStr:
-                answer += numStr[numbers[:pivot]]
-                numbers = numbers[pivot:]
-                pivot = 0
-                
-            pivot += 1
+def solution(score):
+    score = [ (a+b)//2 for a,b in score]
+    rank = sorted(list(score), reverse=True)
     
+    print(score)
+    print(rank)
+    
+    answer = []
+    for i in score:
+        answer.append(rank.index(i)+1)
+        
     return answer
 
 
-a = "onetwothreefourfivesixseveneightnine"
-print(solution(a))
+a = [[80, 70], [70, 80], [30, 50], [90, 100], [100, 90], [100, 100], [10, 30]]
+b = [[0,0],[1,1],[1,1],[1,1],[1,1],[1,1]]
+print(solution(b))

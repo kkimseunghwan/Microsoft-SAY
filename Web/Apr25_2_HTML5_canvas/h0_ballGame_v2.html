@@ -2,141 +2,160 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Apr25</title>
+    <title>공튀기기기</title>
     <script src="jQuery.js"></script>
-
     <script>
+        $(function () {
+            // 게임 맵 크기 설정
+            const canvasWidth = 500;
+            const canvasHeight = 500;
+            
+            const paper = document.getElementById("c");
+            paper.width = canvasWidth;
+            paper.height = canvasHeight;
 
-        $(function() {            
-            // 캔버스 불러오기
-            var paper = document.getElementById("c");
-            var pen = paper.getContext("2d");
-            pen.save();
+            const pen = paper.getContext("2d");
+            
+            // 공 이미지 객체 생성, 이미지 경로 설정
+            const ballImg = new Image();
+            ballImg.src = "img/ball.png";
+            // 공 크기
+            const ballSize = 30;
 
-            score = 0
-            getScore = false;
-            function scoreUpdate(get) {
-                if(get){
-                    score++;
-                }else{
-                    score = 0;
-                }
+            // 점수 저장 변수
+            let score = 0;
+            // 점수 여러번 획득되는 버그 방지
+            let isScored = false;
 
-                $("h2").text("점수 : " + score * 10);
+            // 플레이어 박스 x좌표
+            let xPlayer = 0; 
+            // 박스 가로, 세로 크기
+            const paddleWidth = 160
+            const paddleHeight = 20;
+
+            // 공 처음 스폰 위치
+            let ballX = 100, ballY = 5;
+            // 이동 방향
+            let xMove = 1, yMove = 1;
+            // 이동 속도
+            let speed = 7;
+            const resetSpeed = speed;
+
+            // 이동 방향, 속도 정규화
+            function normalizeVector() {
+                const normVec = Math.sqrt(xMove * xMove + yMove * yMove);
+                xMove /= normVec;
+                yMove /= normVec;
             }
 
+            // 점수 업데이트 및 표시 
+            function updateScore(isGet) {
+                score = isGet ? score + 1 : 0;
 
-            ///////////////////////////////////////////////
+                // 1점씩 오르면 감질맛 나니까 10점씩 상승.
+                $("h2").text("점수 : " + score * 10); 
+            }
 
-            // playerBox
-
-            xplayer = 0;
-            isplayerMove = true;
-            bpxScale = 80;
-
-            $("canvas").mousemove(function(ee) {
-                $("h3").text("mousemove" + ee.pageX + " " + ee.pageY )
-                if(isplayerMove){
-                    xplayer = ee.pageX;
-                }
+            $("canvas").mousemove(function (e) {
+                xPlayer = Math.min(e.pageX, canvasWidth - paddleWidth); // 오른쪽 끝 이동 제한
+                $("h3").text("Mouse: " + xPlayer); // 좌표 확인용
             });
-            
-            ///////////////////////////////////////////////
 
-            xlastPos = 100; 
-            ylastPos = 5;
+            // 시작할때 정규화 한번
+            normalizeVector();
 
-            xmove = 1;
-            ymove = 1;
+            // 이미지 로딩되면,
+            ballImg.onload = function () {
+                function gameLoop() {
+                    pen.save();
+                    pen.fillStyle = "#00000011"; 
+                    pen.fillRect(0, 0, canvasWidth, canvasHeight);
 
-            speed = 10
+                    pen.shadowOffsetX = 0; 
+                    pen.shadowOffsetY = 0;
+                    pen.shadowBlur = 10; 
+                    pen.shadowColor = "red";
+                    
+                    // 공 이동
+                    ballX += xMove * speed;
+                    ballY += yMove * speed;
+                    pen.drawImage(ballImg, ballX, ballY, ballSize, ballSize);
 
-            vecNormal = Math.sqrt(xmove*xmove + ymove*ymove)
-            xmove = xmove/vecNormal;
-            ymove = ymove/vecNormal;
+                    // 플레이어 박스 그리기
+                    pen.shadowColor = "white";
 
-            // 빤짝빤짝
-            setInterval(function() {
-                pen.save();
-                pen.fillStyle = "#FFFFFF44";
-                pen.fillRect(0,0,500,500);
-                
-                ///
-                pen.restore();
+                    pen.fillStyle = "green"; 
+                    pen.fillRect(xPlayer, canvasHeight - 50, paddleWidth, paddleHeight);
+                    pen.restore();
 
-                if(xplayer+bpxScale*2 > 500) {
-                    xplayer = 500 - bpxScale*2;
-                    isplayerMove = false;
-                }else{
-                    isplayerMove = true;
+                    // 벽 충돌
+                    if (ballX <= 0 || ballX >= canvasWidth - ballSize) {
+                        xMove *= -1;
+                        isScored = false;
+                    }
+                    // 천장 충돌
+                    if (ballY <= 0) { 
+                        yMove *= -1;
+                        isScored = false;
+                    }
+                    
+                    // 기본 플레이어 박스 충돌 확인
+                    if (ballY + ballSize >= canvasHeight - 50 && 
+                        ballX + (ballSize/2) >= xPlayer && 
+                        ballX + (ballSize/2) <= xPlayer + paddleWidth) {
+                        
+                        if (Math.abs((ballX+ballSize/2) - (xPlayer+paddleWidth/2)) < 
+                            Math.abs(ballY+ballSize-canvasHeight-50)) { // 박스 왼쪽 벽면으로 부딫히면,
+                            // 공을 강제로 패들 위로 위치 조정
+                            // 충돌 반복 현상 완화
+                            ballY = canvasHeight - 50 - ballSize;
+                            
+                            // 이동 반전
+                            yMove *= -1;
+
+                            // 점수 획득
+                            if (!isScored) updateScore(true);  
+                            
+                            // 공을 받을수록 속도가 상승.
+                            if (speed < resetSpeed * 2) { // 기존 속도 2배까지 상승
+                                speed += 0.2;
+                            } 
+
+                            isScored = true; // 점수 얻음 (추가로 얻지 않음)
+                        }else{
+                            xMove *= -1
+                        }
+
+                    }
+
+                    // 바닥 충돌 (실패)
+                    if (ballY >= canvasHeight) {
+                        ballX = Math.random() * (canvasWidth - ballSize);
+                        ballY = 50;
+                        speed = resetSpeed;
+                        updateScore(false);
+                        isScored = false;
+                    }
+                    // 정규화
+                    normalizeVector();
+                    // 재귀 호출
+                    requestAnimationFrame(gameLoop);
                 }
-
-                pen.fillRect(xplayer, 450, bpxScale*2, 20); //x, y, w, h
-                ///
-                
-                xlastPos += xmove * speed;
-                ylastPos += ymove * speed;
-
-                var _image_ = new Image();
-                _image_.src = "img/ball.png"
-                _image_.onload = function() {
-                    pen.drawImage(_image_, xlastPos, ylastPos, 30, 30); 
-                };
-
-                if((ylastPos+20+15 > 450) && (xplayer < xlastPos) && (xlastPos < xplayer+bpxScale*2)) {
-                    ymove = -1 + Math.random()*0.5
-                    if(!getScore) scoreUpdate(true);
-                    getScore = true;
-                    speed += 0.2
-                }
-
-                if(xlastPos > 470){
-                    xmove = -1 + Math.random()*0.5
-                    getScore = false;
-                }
-                if(xlastPos < 0){
-                    xmove = 1 + Math.random()*0.5
-                    getScore = false;
-                }
-                if(ylastPos < 0){
-                    ymove = 1 + Math.random()*0.5
-                    getScore = false;
-                }
-
-                if(ylastPos > 470 || (ylastPos > 450)) {
-                    //ymove = -1 + Math.random()*0.5
-                    ylastPos = 50
-                    speed = 10
-                    scoreUpdate(false);
-                    getScore = false;
-                }
-
-                vecNormal = Math.sqrt(xmove*xmove + ymove*ymove)
-                xmove = xmove/vecNormal;
-                ymove = ymove/vecNormal;
-
-            }, 25);
-            // xmove = 5 + (Math.random() * 2) - 1;
-
+                requestAnimationFrame(gameLoop);
+            };
         });
     </script>
+
     <style>
         canvas {
             border: solid black 3px;
-            color: rgba(red, green, blue, alpha);
+            background-color: #eee;
         }
-
     </style>
 </head>
-<body>
-    <canvas id="c" width="500px" height="500px">
-
-    </canvas>
-
-    <h2>점수 : 0</h2>
-
-    <h3>마우스</h3>
-
-
-</body>
+    <body>
+        <canvas id="c" width="500" height="500"></canvas>
+        <h2>점수 : 0</h2>
+        <h3>마우스</h3>
+    </body>
 </html>
