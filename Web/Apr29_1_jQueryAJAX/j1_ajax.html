@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ㅋㅋ</title>
+    <script src="jQuery.js"></script>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <script>
+        $(function() {
+            // AJAX : 남의 서버에 있는건 브라우저가 안받아줌
+            // Cross-domain AJAX : 남의 데이터를 가져오는 AJAX
+            //      - 서버측에서 Access-Control-Allow-Origin응답헤더 세팅해놨으면 가져올수있음
+            //      - ???
+
+            // $.ajax({
+            //     url : "http://www.kma.go.kr/repositary/xml/fct/mon/img/fct_mon1rss_108_20250424.xml",
+            //     data : {"변수명": 값, "변수명": 값, ...},
+            //     success : function(받아온거) {
+            //     }
+            // });
+            $.ajax({
+                url : "http://openapi.seoul.go.kr:8088/575a4655496b636839386f58586542/xml/RealtimeCityAir/1/25/",
+                success : function(asd) {
+                    $(asd).find("row").each(function(i, r) {
+                        var msrrgn_nm = $(r).find("MSRRGN_NM").text();
+                        var msrrgn_nm_td = $("<td></td>").text(msrrgn_nm);
+                        var msrste_nm = $(r).find("MSRSTE_NM").text();
+                        var msrste_nm_td = $("<td></td>").text(msrste_nm);
+                        var pm10 = $(r).find("PM10").text();
+                        var pm10_td = $("<td></td>").text(pm10);
+                        var pm25 = $(r).find("PM25").text();
+                        var pm25_td = $("<td></td>").text(pm25);
+                        var index_nm = $(r).find("IDEX_NM").text();
+                        var index_nm_td = $("<td></td>").text(index_nm); 
+                        var tr = $("<tr></tr>").append(msrrgn_nm_td, msrste_nm_td, pm10_td, pm25_td, index_nm_td);
+                        $("table").append(tr);
+                    });
+                }
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title:{
+                    text: "My First Chart in CanvasJS"              
+                },
+                data: [              
+                {
+                    // Change type to "doughnut", "line", "splineArea", etc.
+                    type: "column",
+                    dataPoints: [
+                        { label: "apple",  y: 10  },
+                        { label: "orange", y: 15  },
+                        { label: "banana", y: 25  },
+                        { label: "mango",  y: 30  },
+                        { label: "grape",  y: 28  }
+                    ]
+                }
+                ]
+            });
+            chart.render();
+        }
+        </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <table border="1">
+        <tr>
+            <th>권역</th>
+            <th>구</th>
+            <th>미세먼지</th>
+            <th>초미세먼지</th>
+            <th>상태</th>
+        </tr>
+    </table>
+    <hr>
+    
+</body>
+</html>

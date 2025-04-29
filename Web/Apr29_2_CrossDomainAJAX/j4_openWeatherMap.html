@@ -1,0 +1,81 @@
+<!-- HTML 시각화 : https://canvasjs.com/docs/charts/basics-of-creating-html5-chart/ -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ㅋㅋ</title>
+    <script src="jQuery.js"></script>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <script>
+        $(function() {
+            var cursorImg = document.querySelector("#curImg")
+            var weatherText = document.querySelector("#wtxt")
+            
+            $("body").mousemove(function(e) {
+                cursorImg.style.left = e.pageX + "px";
+                cursorImg.style.top = e.pageY + "px";
+
+                weatherText.style.left = e.pageX + 35 + "px";
+                weatherText.style.top = e.pageY - 20 +"px";
+            });
+            
+            navigator.geolocation.getCurrentPosition(function(asdv) {
+                var lat = asdv.coords.latitude;
+                var lng = asdv.coords.longitude;
+
+                //lat = -73.3070003;
+                //lng = 41.2892984;
+                // https://api.openweathermap.org/data/2.5/weather?lat=37.5693582&lon=126.9858652&appid=baff8f3c6cbc28a4024e336599de28c4&units=metric&lang=kr
+                var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lng + "&appid=baff8f3c6cbc28a4024e336599de28c4&units=metric&lang=kr";
+                $.getJSON(url, function(asd) {
+                    //alert(JSON.stringify(asd))
+                    var desc = asd.weather[0].description;
+                    var temp = asd.main.temp;
+                    var humi = asd.main.humidity;
+                    var imge = asd.weather[0].icon;
+                    $("#desc").text(desc);
+                    $("#temp_humi").text(temp+"°C ("+ humi +"%)");
+                    $("#curImg").attr("src", "http://openweathermap.org/img/wn/"+ imge +"@2x.png");
+                    
+                    pen.fillRect(0, 0, canvasWidth, canvasHeight);
+                });
+
+
+
+            });
+
+
+        });
+    </script>
+    <style>
+        #wtxt {
+            position: absolute;
+        }
+        #curImg {
+            position: absolute;
+        }
+
+        html, body {
+            background-color: bisque;
+            width: 100%;
+            height: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+    <img src="" id="curImg" width="40px" height="40px">
+    <table id="wtxt">
+        <tr>
+            <td id="desc">날씨</td> 
+        </tr>
+        <tr>
+            <td id="temp_humi">기온, 습도</td> 
+        </tr>
+    </table>
+
+</body>
+</html>
