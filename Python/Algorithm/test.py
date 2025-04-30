@@ -1,17 +1,17 @@
-def solution(score):
-    score = [ (a+b)//2 for a,b in score]
-    rank = sorted(list(score), reverse=True)
-    
-    print(score)
-    print(rank)
-    
-    answer = []
-    for i in score:
-        answer.append(rank.index(i)+1)
-        
+
+
+
+
+
+def solution(chicken):
+    answer = 0
+    coupon = chicken
+    while coupon//10 >= 1:
+        service = coupon//10
+        answer += service
+        coupon = coupon%10 + service
+        service = 0
+
     return answer
 
-
-a = [[80, 70], [70, 80], [30, 50], [90, 100], [100, 90], [100, 100], [10, 30]]
-b = [[0,0],[1,1],[1,1],[1,1],[1,1],[1,1]]
-print(solution(b))
+print(solution(1081))

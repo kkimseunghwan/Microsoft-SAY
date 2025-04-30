@@ -1,0 +1,65 @@
+
+<!--
+    REST API : 34123ebf23834864122c75d234e70515
+    JavaScript : fa44b4a1f9b33fba83fbd8e8e148a3f9
+-->
+ <!-- https://dapi.kakao.com/v3/search/book -->
+ <!DOCTYPE html>
+ <html>
+ <head>
+    <meta charset="utf-8">
+    <title>ㅋㅋ</title>
+    <script src="jQuery.js"></script>
+    <script>
+        $(function() {
+            $("input").keyup(function(e) {
+                $("button").trigger("click");
+            });
+
+            $("button").click(function() {
+                var searchTxt = $("input").val();
+                $.ajax({
+                    url : "https://dapi.kakao.com/v3/search/book",
+                    data : {query : searchTxt},
+                    
+                    beforeSend: function(req) {
+                        req.setRequestHeader("Authorization", "KakaoAK 34123ebf23834864122c75d234e70515");
+
+                    },
+                    
+                    success : function(jsonn) {
+                        $.each(jsonn.documents, function(i, data) {
+                            
+                            var title = data.title;
+                            var thumbnail = data.thumbnail;
+                            var sale_price = data.sale_price;
+
+                            var sale_priceTd = $("<td></td>").attr("align","right").html(sale_price);
+                            var titleTd = $("<td></td>").text(title);
+                            var thumbnailImg = $("<img>").attr(src, thumbnail);
+                            var thumbnailTd = $("<td></td>").attr("rowspan","2").append(thumbnailImg);
+                            
+                            var tr1 = $("<tr></tr>").append(thumbnailTd, titleTd);
+                            var tr2 = $("<tr></tr>").append(sale_priceTd);
+                            $("table").append(tr1, tr2)
+                        });
+                    }
+
+                });
+            });
+        });
+    </script>
+     
+ </head>
+<body>
+    <input><button>검색</button>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>제목</th>
+            <th>이미지</th>
+            <th>가격</th>
+        </tr>
+    </table>
+ </body>
+ </html>
