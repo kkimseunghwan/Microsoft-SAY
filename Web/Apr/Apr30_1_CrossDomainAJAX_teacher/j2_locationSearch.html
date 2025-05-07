@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8">
+    <title>ㅋ</title>
+    <style>
+        #map {
+            width: 500px;
+            height: 500px;
+        }
+ 
+        #rv {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+    <script type="text/javascript"
+        src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=6e2377538e7c2d476494bdd32b7161a0"></script>
+    <script src="jQuery.js"></script>
+    <script>
+        $(function () {
+            var mapArea = document.getElementById('map');
+            var rvArea = document.getElementById('rv');
+            var rvManager = new kakao.maps.RoadviewClient();
+            var map; var marker;
+            var roadview = new kakao.maps.Roadview(rvArea);
+            function moveMap(lat, lng) {
+                var ll = new kakao.maps.LatLng(lat, lng);
+                map.setCenter(ll);
+                marker.setPosition(ll);
+                rvManager.getNearestPanoId(ll, 100, function (panoId) {
+                    roadview.setPanoId(panoId, ll);
+                });
+            }
+            navigator.geolocation.getCurrentPosition(function (loc) {
+                var lat = loc.coords.latitude;
+                var lng = loc.coords.longitude;
+                var ll = new kakao.maps.LatLng(lat, lng);
+                map = new kakao.maps.Map(mapArea, { center: ll, level: 3 });
+                marker = new kakao.maps.Marker({ map: map, position: ll });
+                moveMap(lat, lng);
+            });
+ 
+            $("#search1").keyup(function (e) {
+                var search1Txt = $(this).val();
+                $.ajax({
+                    url: "https://dapi.kakao.com/v2/local/search/address.json",
+                    data: { query: search1Txt },
+                    beforeSend: function (req) {
+                        req.setRequestHeader("Authorization", "KakaoAK 48412524e1d7ccbf166a18a4687b943e");
+                    },
+                    success: function (search1Data) {
+                        moveMap(search1Data.documents[0].y, search1Data.documents[0].x);
+                    }
+                });
+            });
+ 
+        });
+    </script>
+</head>
+ 
+<body>
+    <table>
+        <tr>
+            <td>
+                <div id="map"></div>
+            </td>
+            <td>
+                <div id="rv"></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input id="search1" placeholder="지역">
+                <input id="search2" placeholder="뭐">
+            </td>
+        </tr>
+    </table>
+</body>
+ 
+</html>

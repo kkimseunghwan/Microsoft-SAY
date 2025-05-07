@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ㅋ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
+    <script src="jQuery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+    <script>
+        $(function () {
+            var s = $(".slider").bxSlider();
+
+            $("button").click(function () {
+                var searchTxt = $("input").val();
+                $.ajax({
+                    url: "https://dapi.kakao.com/v3/search/book",
+                    data: { query: searchTxt },
+                    beforeSend: function (req) {
+                        req.setRequestHeader("Authorization", "KakaoAK f34fe373bf79e015187495714d850629");
+                    },
+                    success: function (jsonn) {
+                        $("table").empty();
+                        $(".slider").empty();
+                        $.each(jsonn.documents, function (i, b) {
+                            var titleTd = $("<td></td>").text(b.title);
+                            var priceTd = $("<td></td>").attr("align", "right").text(b.sale_price);
+                            var thumbnailImg = $("<img>").attr("src", b.thumbnail);
+                            var thumbnailTd = $("<td></td>").attr("rowspan", "2").append(thumbnailImg);
+                            var tr1 = $("<tr></tr>").append(thumbnailTd, titleTd);
+                            var tr2 = $("<tr></tr>").append(priceTd);
+                            $("table").append(tr1, tr2);
+
+                            var thumbnailImg2 = $("<img>").attr("src", b.thumbnail).attr("title", b.title);
+                            var div = $("<div></div>").append(thumbnailImg2);
+                            $(".slider").append(div);
+                        });
+                        s.reloadSlider();
+                    }
+                });
+            });
+            $("input").keyup(function () {
+                $("button").trigger("click");
+            });
+        });
+    </script>
+</head>
+
+<body> 
+    <input><button>검색</button>
+    <hr>
+    <div class="slider">
+        
+    </div>
+    <hr>
+    <table border="1">
+
+    </table>
+</body>
+
+</html>
