@@ -1,0 +1,40 @@
+/* style.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+#coverPage img{
+    margin-top: 100px;
+    width: 50%;
+}
+
+#coverPageContentArea{
+    text-align: center;
+}
+
+#coverPageContentArea img {
+    margin-top: 100px;
+    width: 50%;
+}
+
+input, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

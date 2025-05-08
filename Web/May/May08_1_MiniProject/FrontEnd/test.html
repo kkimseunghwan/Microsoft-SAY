@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>딥레이서 관리</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script src="index_jQuery.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- 커버 페이지 -->
+    <div data-role="page" id="coverPage">
+        <div data-role="header">
+            <h1>딥레이서 관리</h1>
+        </div>
+        <div data-role="content" id="coverPageContentArea">
+            <a href="#mainPage">
+                <img src="img/deepracer.jpg">
+            </a>
+        </div>
+    </div>
+
+    <!-- 등록 페이지 -->
+    <div data-role="page" id="mainPage">
+        <div data-role="header">
+            <a href="#coverPage" data-icon="arrow-l">뒤로</a>
+            <h1>자동차 등록</h1>
+        </div>
+        <div data-role="content">
+            <input id="colorInput" placeholder="색깔">
+            <textarea id="statusInput" placeholder="정보" data-autogrow="false"></textarea>
+            <a href="#" id="registerBtn" data-role="button">등록</a>
+            <hr>
+            <a href="#listPage" data-role="button" data-transition="slide">자동차 목록 보기</a>
+        </div>
+    </div>
+
+    <!-- 목록 조회 페이지 -->
+    <div data-role="page" id="listPage">
+        <div data-role="header">
+            <a href="#mainPage" data-icon="arrow-l">뒤로</a>
+            <h1>자동차 목록</h1>
+        </div>
+        <div data-role="content">
+            <ul id="carList" data-role='listview' data-inset='true'>
+            <!-- JS로 동적 추가됨 -->
+            
+            </ul>
+        </div>
+    </div>
+
+    <!-- 수정 페이지 -->
+    <div data-role="page" id="editPage">
+        <div data-role="header">
+            <a href="#listPage" data-icon="arrow-l">뒤로</a>
+            <h1>자동차 수정</h1>
+        </div>
+        <div data-role="content">
+            <table>
+                <tr>
+                    <th>Car No.</th>
+                    <th><h3 id="editNoDisplay"></h3></th> <!-- 번호 표시 -->
+                </tr>
+            </table>
+            <input id="editColor" placeholder="색깔">
+            <textarea id="editStatus" placeholder="정보"></textarea>
+            <a href="#" id="editSubmit" data-role="button">수정</a>
+            <a href="#" id="deleteBtn" data-role="button" data-theme="a">삭제</a>
+        </div>
+    </div>
+
+</body>
+</html>
