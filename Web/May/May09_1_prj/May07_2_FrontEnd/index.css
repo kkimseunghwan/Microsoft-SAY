@@ -1,0 +1,24 @@
+#coverPage img {
+    margin-top: 25px;
+    width: 50%;
+}
+
+#coverPageContentArea {
+    text-align: center;
+}
+
+textarea {
+    resize: none;
+}
+
+#pageControlArea {
+    width: 100%;
+}
+#pageControlArea a{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    color:black;
+    font-weight: 900;
+    cursor: pointer;
+}

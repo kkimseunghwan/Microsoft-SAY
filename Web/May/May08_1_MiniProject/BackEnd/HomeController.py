@@ -85,11 +85,12 @@ def machineDel(number):
 
 @app.get("/machine.upd")
 def machineUpd(number, color, status):
+    print("ASD")
     h = {"Access-Control-Allow-Origin": "*"}
     s = {"결과" : "실패"}
     con = connect("Hwan/1234@195.168.9.116:1521/XE")
 
-    sql = f"UPDATE may07_deepracer_machine SET DM_COLOR = '{color}', DM_STATUS='{status}', DM_CHECK_DATE = SYSDATE WHERE DM_NO = {number};"
+    sql = f"UPDATE may07_deepracer_machine SET DM_COLOR = '{color}', DM_STATUS='{status}', DM_CHECK_DATE = SYSDATE WHERE DM_NO = {number}"
         
     cur = con.cursor()
     cur.execute(sql)

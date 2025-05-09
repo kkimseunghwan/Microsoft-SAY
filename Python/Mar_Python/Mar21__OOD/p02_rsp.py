@@ -24,7 +24,7 @@ class GameRefree:
             enemyHand = self.enemyFire(enemyCorner)
             userHand = self.userFire(userCorner)
             self.tellHand(userHand, enemyHand)
-            end = self.judge(userHand, enemyHand)
+            end = self.judge(userHand, enemyHand, userCorner)
             if end: break
         
         self.tellResult(userCorner.win)

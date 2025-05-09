@@ -66,7 +66,7 @@ function machineDataEdit() {
         var color = $("#editColor").val();
         var status = $("#editStatus").val();
         
-        var url = "http://127.0.0.1:5678/machine.reg?color=" + color + "&status=" + status + "&number=" + car_num;
+        var url = "http://127.0.0.1:5678/machine.upd?number=" + car_num + "&color=" + color + "&status=" + status;
 
         $.getJSON(url, function(result) {
             alert(JSON.stringify(result));
