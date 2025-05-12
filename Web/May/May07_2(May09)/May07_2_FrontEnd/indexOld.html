@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ㅋ</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <style>
+        #coverPage img {
+            margin-top: 25px;
+            width: 50%;
+        }
+
+        #coverPageContentArea {
+            text-align: center;
+        }
+
+        #pageControlArea {
+            width: 100%;
+        }
+
+        #pageControlArea a {
+            margin-left: 10px;
+            margin-right: 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        ::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script src="may072_jQueryOld.js"></script>
+</head>
+
+<body>
+    <div data-role="page" id="coverPage" data-theme="b">
+        <div data-role="header">
+            <h1>고은비 망해라</h1>
+        </div>
+        <div data-role="content" id="coverPageContentArea">
+            <a href="#mainPage" data-transition="flow" id="goMainPageA">
+                <img src="bg.jpg">
+            </a>
+        </div>
+    </div>
+    <div data-role="page" id="mainPage" data-theme="b">
+        <div data-role="header">
+            <a href="#coverPage" data-transition="turn" data-icon="arrow-l">뒤로</a>
+            <h1>고은비 망해라</h1>
+        </div>
+        <div data-role="content">
+            <input placeholder="색깔" id="colorInput" autocomplete="off">
+            <input placeholder="상태" id="statusInput" autocomplete="off">
+            <button>등록</button>
+            <hr>
+            <input placeholder="검색" id="searchInput" autocomplete="off">
+            <table id="pageControlArea">
+                <tr>
+                    <td align="center"></td>
+                </tr>
+            </table>
+            <ul data-role="listview" data-inset="true" data-theme="c"></ul>
+        </div>
+    </div>
+</body>
+
+</html>

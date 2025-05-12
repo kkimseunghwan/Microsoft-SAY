@@ -1,0 +1,81 @@
+
+
+
+기본적으로 컴은 한번에 한 작업만 가능 => Single Thread : 쓰레드
+
+한번에 동시에 여러작업 하는 것 => Multithread = 멀티 쓰레드.
+    1) Python이 멀티쓰레드에 약함
+    2) 멀티쓰레드는 컴퓨터 자원을 많이 사용함. -> 컴퓨터 부담이 증가됨.
+
+
+r : single thread
+    작업 끝날 때까지 기다림
+    blocking I/O
+
+p : multi thread
+    blocking I/O
+
+b : single thread
+    non-blocking I/O
+
+
+
+FastAPI
+    Python 프레임워크
+    uvicorn WAS에 실어서 실행
+    uvicorn main:app --reload
+    Python 라이브러리
+
+Node.js
+    JavaScript 런타임
+    단독 실행
+    JS 독립 프레임워크
+    npm을 활용해서 다양한 add-on을 설치해서 사용
+
+
+    npm install [이름] -g : Node.js 본체에 붙이는 툴 느낌
+    npm install [이름]    : 프로젝트 내부에 넣는 라이브러리 느낌
+
+
+
+
+
+Node.js 사용법
+
+----- 기본 설치 -----
+1) Node.js 본체 설치
+    https://nodejs.org/en/download/
+
+2) nodemon 설치 = 소스 작업하고 저장하면 자동으로 재시작
+    시작 -> CMD -> 명령 프롬프트
+        npm install -g nodemon -g
+
+3) express : 웹 백엔드 프로젝트 자동 생성
+    npm install express -g
+    npm install express-generator@4 -g
+
+----- 프로젝트 생성 -----
+1) 프로젝트 만들 공간으로 가서 CMD 접속.
+
+2) express 프로젝트 생성
+    express [프로젝트 이름]
+ex) express May12_1_Test
+
+3) 프로젝트 폴더로 들어가서
+    cd 프로젝트 이름
+
+4) 기본적으로 필요한 라이브러리 설치
+    npm install
+
+5) app.js 파일 편집
+
+----- 실행 -----
+1) 실행
+    nodemon app.js
+
+2) 종료
+    ctrl + c
+
+
+
+nodejs + MongoDB
