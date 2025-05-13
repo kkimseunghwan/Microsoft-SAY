@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>ㅋㅋ</title>
+<script src="http://195.168.9.139:9999/socket.io/socket.io.js"></script>
+<script src="jQuery.js"></script>
+<script>
+    $(function() {
+
+        var socket = io.connect("http://195.168.9.139:9999");
+
+        socket.on('you-are-host', ({ userName }) => {
+            console.log('나는 중심 사용자(방장)이다.');
+            $("#status").text("상태 : 방장");
+
+            if (userName[socket.id]) {
+                $("#status").text("상태 : 방장(" + userName[socket.id] + ")");
+            }
+        });
+
+        socket.on('you-are-guest', ({ userName }) => {
+            console.log(`당신은 게스트`);
+            $("#status").text("상태 : 게스트");
+
+            if (userName[socket.id]) {
+                $("#status").text("상태 : 게스트(" + userName[socket.id] + ")");
+            }
+        });
+
+        socket.on('user-list', (list) => {
+            console.log('현재 접속자:', list);
+            $("#userList").empty();
+            
+            list.forEach(id => {
+                if (userName[id]) {
+                    $("#userList").append("<li>" + userName[id] + "</li>");
+                } else {
+                    $("#userList").append("<li>" + id + "</li>");
+                }
+            });
+        });
+
+        $("#setname").click(function(){
+            var name = $("#name").val();
+            alert(name);
+            socket.emit("setName", name);
+        });
+
+        socket.on('error', (msg) => {
+            alert(msg);
+        });
+
+        socket.on("connect", function(){
+            // alert("연결 완료");
+        });
+
+        $("#send").click(function(){
+            var msg = $("#msg").val();
+            socket.emit("message", msg);
+        });
+
+        socket.on("messageReturn", function(message){
+            alert(message);
+        });
+
+        // 메세지 받으면 리스트에 추가
+        socket.on("messageReturn", function(message){
+            $("#msgList").append("<li>" + message + "</li>");
+        });
+
+
+
+
+    });
+
+</script>
+</head>
+
+<body>
+    <h2>웹 소켓 클라이언트</h2>
+
+    <h3>이름 설정</h3>
+    <input id="name">
+    <button id="setname">설정</button> <br>
+
+    <h3>메세지 입력</h3>
+    <input id="msg">
+    <button id="send">전송</button> <br>
+
+    <h3 id="status">상태 : </h3>
+
+    <ul id="userList">
+    </ul>
+    <ul id="msgList">
+    </ul>
+</body>
+</html>

@@ -27,11 +27,11 @@ txt = input("뭐 : ")
 
 # open("열고 싶은 파일 경로")
 # 파일은 없으면 만들어줌, 드라이브/폴더는 안만들어줌
-f = open("C:\\Hwan\\workspace\\Python\\Mar25_1_UsefulClass_Data\\0325Test.txt", "a", encoding="utf-8")
+f = open("C:\\Hwan\\0325Test.txt", "a", encoding="utf-8")
 # r : read
 # w : write(기존거 지우고)
 # a : append (기존거 뒤에)
-
+print(type(f))
 f.write(txt + "\n")
 f.close()
 

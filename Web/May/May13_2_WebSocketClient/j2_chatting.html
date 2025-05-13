@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>ㅋㅋ</title>
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>    
+<script src="jQuery.js"></script>
+
+<script src="http://195.168.9.139:8888/socket.io/socket.io.js"></script>
+<script>
+  
+    $(function() {
+
+        var nickname = "";
+        var socketID = "";
+
+        // a태그 클릭 이벤트 처리
+        $(document).on("click", "#joinBtn", function(e) {
+          e.preventDefault(); // 기본 동작 방지
+          nickname = $("#nicknameInput").val();
+          if (nickname == "") {
+            alert("닉네임을 입력해 주세요.");
+            return;
+          }
+          // 접속
+          $("#joinBtn").attr("href", "#chattingPage");
+        });
+        
+
+        // 이미지 업로드
+        $("#profile-image").change(function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) { 
+                    $("#preview-image").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Node.js 통신
+        var socket = io.connect("http://195.168.9.139:8888");
+
+        socket.on('connect', function() {
+          socketID = socket.id;
+        });
+
+        $("#msgInput").keyup(function(e) {
+          if (e.keyCode == 13) {
+            var nickname = $("#nicknameInput").val();
+            var msg = $(this).val();
+
+            if (msg == "") {
+              return;
+            }
+
+            socket.emit('clnMsg', {"nickname": nickname, "msg": msg, "socketID": socketID});
+            $(this).val('');
+
+          }
+        });
+
+        // 서버에서 메시지 받기
+        socket.on('srvMsg', function(msg) {
+          // 소캣 아이디로 비교
+          if (msg["socketID"] == socketID) {
+            // 자신 메시지
+            $("#msgList").append("<li><div class='myMsg' style='text-align: right;'><div class='nickname'>나</div><div class='msgContent'>" + msg["msg"] + "</div></div></li>");
+          } else {
+            // 상대방 메시지
+            $("#msgList").append("<li><div class='msg'><div class='nickname'>" + msg["nickname"] + "</div><div class='msgContent'>" + msg["msg"] + "</div></div></li>");
+          }
+
+          // 페이지 항상 맨 아래로 이동
+          $(window).scrollTop($(document).height());
+        });
+
+    });
+
+</script>
+<style>
+
+li {
+  list-style: none;
+}
+
+.myMsg {
+  text-align: right;
+}
+
+.msgContent {
+  padding-bottom: 5px;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #f5f5f5;
+}
+
+
+#chatContainer {
+  overflow-y: auto;
+  height: 100%;
+  padding: 10px;
+  
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+#msgList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#msgList li {
+  margin-bottom: 12px;
+}
+
+.myMsg {
+  text-align: right;
+}
+
+.myMsg .msgContent {
+  display: inline-block;
+  background-color: #cce5ff;
+  color: #003366;
+  padding: 10px 14px;
+  border-radius: 18px 18px 0 18px;
+  max-width: 70%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.msg .msgContent {
+  display: inline-block;
+  background-color: #eeeeee;
+  color: #333333;
+  padding: 10px 14px;
+  border-radius: 18px 18px 18px 0;
+  max-width: 70%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.nickname {
+  font-size: 0.75em;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.msgInput {
+  padding-left: 10px;
+}
+
+</style>
+</head>
+<body>
+  <div data-role="page" id="loginPage">
+    <div data-role="header" data-theme="b", data-position="fixed">
+      <h1>채팅 로그인</h1>
+    </div>
+
+    <div data-role="content">
+      <input type="text" id="nicknameInput" autocomplete="off" placeholder="닉네임을 입력해 주세요.">
+      <a id="joinBtn" class="joinBtn" data-role="button" data-theme="b">입장</a>
+    </div>
+  </div>
+
+  <div data-role="page" id="chattingPage">
+    <div data-role="header" data-theme="b", data-position="fixed">
+      <a href="#loginPage" data-role="button" data-theme="b">나가기</a>
+      <h1>채팅</h1>
+    </div>
+
+    
+    <div data-role="content">
+      <!-- 메시지 목록 -->
+      <div id="chatContainer">
+        <ul id="msgList" style="margin: 0; padding: 0;">
+
+
+        </ul>
+      </div>
+    </div>
+
+    <div data-role="footer" data-theme="b" data-position="fixed">
+      <div data-role="fieldcontain">
+        <!-- 이전에 입력한 메세지 기록 나타나지 않게 -->
+        <input type="text" id="msgInput" autocomplete="off" placeholder="메시지를 입력해 주세요.">
+      </div>
+    </div>
+  </div>
+    
+  
+</body>
+</html>
+

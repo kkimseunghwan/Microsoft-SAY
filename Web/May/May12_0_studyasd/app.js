@@ -1,11 +1,11 @@
 // Node.js 프로젝트 기본 구조
 
-// 1. 프로젝트 생성
-// 2. 프로젝트 폴더로 이동
-// 3. 기본적으로 필요한 라이브러리 설치
+// 1. 프로젝트 생성 : express 프로젝트 생성
+// 2. 프로젝트 폴더로 이동 
+// 3. 기본적으로 필요한 라이브러리 설치 : npm install 
 // 4. app.js 파일 편집
+// 5. 실행 : nodemon app.js
 
-// 5. 실행
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="http://195.168.9.139:8888/socket.io/socket.io.js"></script>
+    <script src="jQuery.js"></script>
+    <title>ㅋ</title>
+    <style>
+        #c {
+            border: black solid 3px;
+        }
+    </style>
+    <script src="jQuery.js"></script>
+    <script>
+        var drawMode = true;
+        var isDrawing = false;
+        var lastX = 0;
+        var lastY = 0;
+
+        function draw(paper, pen, lastX, lastY, currentX, currentY, color) {
+            pen.strokeStyle = color;
+            pen.beginPath();
+            pen.moveTo(lastX, lastY);
+            pen.lineTo(currentX, currentY);
+            pen.stroke();
+        }
+
+        $(function () {
+            var paper = document.getElementById("c");
+            var pen = paper.getContext("2d");
+
+            // Node.js 통신
+            var socket = io.connect("http://195.168.9.139:8888");
+            
+            // 펜 설정
+            pen.strokeStyle = "black"; // 기본 색상
+            pen.lineWidth = 2;
+            pen.lineCap = "round";
+            
+            // 마우스 다운 이벤트
+            $("canvas").mousedown(function(e) {
+                // 펜 찍을 때 색 설정
+                pen.strokeStyle = $("#colorPicker").val();
+
+                isDrawing = true;
+                var rect = paper.getBoundingClientRect();
+                lastX = e.clientX - rect.left;
+                lastY = e.clientY - rect.top;
+            });
+
+            // 마우스 이동 이벤트
+            $("canvas").mousemove(function(e) {
+                if (!isDrawing) return;
+                
+                var rect = paper.getBoundingClientRect();
+                var currentX = e.clientX - rect.left;
+                var currentY = e.clientY - rect.top;
+                
+                // pen.beginPath();
+                // pen.moveTo(lastX, lastY);
+                // pen.lineTo(currentX, currentY);
+                // pen.stroke();
+                // draw(paper, pen, lastX, lastY, currentX, currentY);
+                
+                // 좌표값 전달
+                socket.emit('drawMove', 
+                { "lastX": lastX, "lastY": lastY, "currentX": currentX, "currentY": currentY, "color": pen.strokeStyle} );
+                
+
+
+                lastX = currentX;
+                lastY = currentY;
+
+
+            });
+
+            // 그림 그리기
+            socket.on('draw', function(data) {
+                draw(paper, pen, data["lastX"], data["lastY"], data["currentX"], data["currentY"], data["color"]);
+            });
+
+            // 마우스 업 이벤트
+            $("canvas").mouseup(function(e) {
+                isDrawing = false;
+            });
+
+            // 마우스가 캔버스를 벗어날 때
+            $("canvas").mouseleave(function(e) {
+                isDrawing = false;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <canvas id="c" width="800px" height="600px"></canvas> <br>
+    <!-- 색 정하는 팔래트 -->
+    <input type="color" id="colorPicker" value="black" style="width: 100px; height: 100px;">
+    
+
+</body>
+
+</html>
