@@ -24,7 +24,7 @@ body {
 }
 
 .drawing-canvas {
-  border: 2px solid #d1d9e6; /* 캔버스 테두리 색상 변경 */
+  border: 2px solid #d1d9e6; 
   border-radius: 8px; /* 캔버스 모서리 둥글게 */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   cursor: crosshair; /* 그리기 커서 모양 */
