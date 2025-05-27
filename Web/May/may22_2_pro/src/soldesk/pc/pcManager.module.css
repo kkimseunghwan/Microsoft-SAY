@@ -1,0 +1,46 @@
+:global #pcManagerRegTbl input {
+    border: #0277bd solid 3px;
+    width: 200px;
+    height: 30px;
+    outline: none;
+}
+:global #pcManagerRegTbl input::placeholder {
+    color: #0277bd;
+}
+:global #pcManagerRegTbl input:focus {
+    border: #b3e5fc solid 3px;
+}
+:global #pcManagerRegTbl button {
+    width: 200px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    color: #0277bd;
+    cursor: pointer;
+    font-weight: 900;
+    outline: none;
+}
+:global #pcManagerPCTbl {
+    width: 700px;
+    background-color: #0277bd;
+    color: white;
+    border-spacing: 0px;
+}
+:global #pcManagerPCTbl th {
+    height: 40px;
+}
+.dataTr {
+    background-color: whitesmoke;
+    color: black;
+    height: 35px;
+    cursor: pointer;
+}
+.dataTr:hover{
+    background-color: #b3e5fc;
+}
+.pageSpan{
+    color:white;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
