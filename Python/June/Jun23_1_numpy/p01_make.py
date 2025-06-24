@@ -22,7 +22,7 @@ b = np.random.randint(1, 11, [2, 3])  #
 print(a)
 print(b)
 
-d = np.add(a, b)  # a와 b의 요소별 덧셈
+d = np.add(a, b)  # a와 b의 요소별 덧셈as
 print(d)
 d = np.subtract(a, b)  # a와 b의 요소별 뺄셈
 print(d)
